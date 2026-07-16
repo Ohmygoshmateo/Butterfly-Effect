@@ -1,0 +1,2695 @@
+/* =========================================================
+   The Butterfly Effect - Stylesheet
+   A light, soft, ambient theme with gentle 3D depth.
+   ========================================================= */
+
+/* ---------- Color and value variables ---------- */
+:root {
+  /* Background uses a soft lavender-grey, light but not plain white */
+  --page-bg-top: #eef0f8;
+  --page-bg-bottom: #e4e6f3;
+
+  /* Surfaces (cards) are near-white with a faint cool tint */
+  --card-bg: #fbfbff;
+  --card-bg-soft: #f4f5fc;
+
+  /* Text colors */
+  --text-dark: #23263a;
+  --text-medium: #565a76;
+  --text-light: #8a8fab;
+
+  /* The main accent is a soft but rich purple */
+  --purple: #6d5fd6;
+  --purple-dark: #5447b8;
+  --purple-soft: #ece9fb;
+
+  /* Outcome colors (slightly deeper so they read on a light background) */
+  --green: #2f9e76;
+  --green-soft: #e4f5ee;
+  --gold: #c08a1e;
+  --gold-soft: #f8efd9;
+  --red: #d05a5a;
+  --red-soft: #fbe8e8;
+
+  /* Borders and lines */
+  --border: #dfe1ef;
+  --border-soft: #e9eaf4;
+
+  /* Soft shadows give the 3D, raised feeling */
+  --shadow-small: 0 2px 6px rgba(60, 60, 110, 0.08);
+  --shadow-medium: 0 6px 18px rgba(60, 60, 110, 0.12);
+  --shadow-large: 0 14px 36px rgba(60, 60, 110, 0.16);
+
+  /* Rounded corners */
+  --radius: 14px;
+  --radius-small: 9px;
+}
+
+/* ---------- Basic reset ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text-dark);
+  /* a soft diagonal gradient plus two faint colored glows for an ambient feel */
+  background:
+    radial-gradient(circle at 15% 10%, rgba(126, 111, 230, 0.10), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(94, 200, 180, 0.10), transparent 45%),
+    linear-gradient(160deg, var(--page-bg-top), var(--page-bg-bottom));
+  background-attachment: fixed;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ---------- Scrollbar (light themed) ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c8cbe0;
+  border-radius: 5px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header {
+  background: rgba(251, 251, 255, 0.85);
+  /* a soft blur behind the header adds depth */
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-small);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  /* the logo box has a gradient and a soft glow to look raised */
+  background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(109, 95, 214, 0.4);
+}
+
+.site-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.site-subtitle {
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+}
+
+.header-right {
+  display: flex;
+  gap: 8px;
+}
+
+.header-button {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  color: var(--text-medium);
+  font-size: 13px;
+  padding: 7px 14px;
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: all 0.2s ease;
+}
+.header-button:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+.header-button.active {
+  background: var(--purple-soft);
+  border-color: var(--purple);
+  color: var(--purple-dark);
+}
+
+/* =========================================================
+   HELP PANEL
+   ========================================================= */
+.help-panel {
+  display: none;
+  background: var(--card-bg-soft);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 28px;
+}
+.help-panel.open {
+  display: block;
+}
+
+.help-grid {
+  max-width: 820px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.help-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-small);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-small);
+}
+.help-card h3 {
+  font-size: 13px;
+  color: var(--purple-dark);
+  margin-bottom: 6px;
+}
+.help-card p {
+  font-size: 12.5px;
+  color: var(--text-medium);
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+.main-content {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* shared card style with soft 3D shadow */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-medium);
+  padding: 24px;
+  margin-bottom: 22px;
+}
+
+/* =========================================================
+   INPUT CARD
+   ========================================================= */
+.field-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.decision-input {
+  width: 100%;
+  background: var(--card-bg-soft);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-small);
+  color: var(--text-dark);
+  font-size: 15px;
+  font-family: inherit;
+  padding: 13px 15px;
+  resize: vertical;
+  line-height: 1.5;
+  /* inset shadow makes the text box look gently recessed */
+  box-shadow: inset 0 2px 4px rgba(60, 60, 110, 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.decision-input:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: inset 0 2px 4px rgba(60, 60, 110, 0.06),
+              0 0 0 3px rgba(109, 95, 214, 0.15);
+}
+.decision-input.input-error {
+  border-color: var(--red);
+}
+
+.input-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  min-height: 18px;
+}
+.validation-message {
+  font-size: 12px;
+  color: var(--red);
+}
+.char-count {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-left: auto;
+}
+
+.small-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin: 16px 0 8px 0;
+}
+
+/* example buttons */
+.example-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.example-button {
+  background: var(--card-bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-medium);
+  font-size: 12px;
+  padding: 6px 13px;
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: all 0.2s ease;
+}
+.example-button:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+  transform: translateY(-1px);
+}
+
+/* category buttons */
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.category-button {
+  background: var(--card-bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-medium);
+  font-size: 13px;
+  padding: 6px 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.category-button:hover {
+  border-color: var(--purple);
+}
+.category-button.active {
+  background: var(--purple-soft);
+  border-color: var(--purple);
+  color: var(--purple-dark);
+  font-weight: 600;
+  box-shadow: var(--shadow-small);
+}
+
+/* situation toggle and fields */
+.situation-toggle {
+  background: none;
+  border: none;
+  color: var(--purple);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 14px 0 0 0;
+  display: block;
+}
+.situation-toggle:hover {
+  color: var(--purple-dark);
+  text-decoration: underline;
+}
+
+.situation-fields {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+}
+.situation-field {
+  flex: 1;
+}
+
+.text-input {
+  width: 100%;
+  background: var(--card-bg-soft);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-small);
+  color: var(--text-dark);
+  font-size: 14px;
+  font-family: inherit;
+  padding: 10px 13px;
+  box-shadow: inset 0 2px 4px rgba(60, 60, 110, 0.06);
+  transition: border-color 0.2s ease;
+}
+.text-input:focus {
+  outline: none;
+  border-color: var(--purple);
+}
+
+/* action buttons */
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-small);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 26px;
+  cursor: pointer;
+  /* a colored shadow makes the button look like it floats above the page */
+  box-shadow: 0 6px 16px rgba(109, 95, 214, 0.4);
+  transition: all 0.2s ease;
+}
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(109, 95, 214, 0.5);
+}
+.primary-button:active {
+  transform: translateY(0);
+}
+
+.secondary-button {
+  background: var(--card-bg);
+  color: var(--text-medium);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  font-size: 13px;
+  padding: 11px 18px;
+  cursor: pointer;
+  box-shadow: var(--shadow-small);
+  transition: all 0.2s ease;
+}
+.secondary-button:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+.action-note {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-left: auto;
+}
+
+/* =========================================================
+   LOADING MESSAGE
+   ========================================================= */
+.loading-message {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--text-medium);
+}
+
+.loading-spinner {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 16px auto;
+  border: 4px solid var(--purple-soft);
+  border-top-color: var(--purple);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   RESULTS AREA
+   ========================================================= */
+.results-area {
+  margin-top: 8px;
+}
+
+/* decision summary card */
+.summary-card {
+  border-left: 4px solid var(--purple);
+}
+.summary-label {
+  font-size: 11px;
+  color: var(--purple);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+/* small colored badge showing the detected category */
+.domain-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  margin-left: 8px;
+  border: 1px solid var(--purple);
+  border-radius: 12px;
+  vertical-align: middle;
+}
+.summary-text {
+  font-size: 16px;
+  color: var(--text-dark);
+}
+
+/* legend */
+.legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-small);
+  padding: 12px 18px;
+  margin-bottom: 18px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-medium);
+}
+.legend-icon {
+  font-weight: 700;
+  font-size: 16px;
+}
+.legend-icon.best {
+  color: var(--green);
+}
+.legend-icon.likely {
+  color: var(--gold);
+}
+.legend-icon.worst {
+  color: var(--red);
+}
+
+/* view toggle buttons */
+.view-toggle {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--card-bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  padding: 4px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-small);
+}
+.view-button {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-medium);
+  font-size: 13px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.view-button.active {
+  background: var(--purple);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(109, 95, 214, 0.35);
+}
+
+/* timeline view */
+.period-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 22px 0 12px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+/* path cards with soft 3D depth */
+.path-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-medium);
+  /* a colored bar on the left edge tells you which type it is */
+  border-left: 4px solid var(--border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.path-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-large);
+}
+.path-card.best {
+  border-left-color: var(--green);
+}
+.path-card.likely {
+  border-left-color: var(--gold);
+}
+.path-card.worst {
+  border-left-color: var(--red);
+}
+
+.path-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.path-icon {
+  font-size: 17px;
+  font-weight: 700;
+}
+.path-icon.best {
+  color: var(--green);
+}
+.path-icon.likely {
+  color: var(--gold);
+}
+.path-icon.worst {
+  color: var(--red);
+}
+
+.path-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+.path-label.best {
+  background: var(--green-soft);
+  color: var(--green);
+}
+.path-label.likely {
+  background: var(--gold-soft);
+  color: var(--gold);
+}
+.path-label.worst {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.path-text {
+  font-size: 14px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* snapshot view */
+.snapshot-buttons {
+  display: flex;
+  gap: 4px;
+  background: var(--card-bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  padding: 4px;
+  width: fit-content;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-small);
+}
+.snap-button {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-medium);
+  font-size: 13px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.snap-button.active {
+  background: var(--purple);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.snapshot-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  border-top: 3px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-medium);
+}
+.snapshot-card.best {
+  border-top-color: var(--green);
+}
+.snapshot-card.likely {
+  border-top-color: var(--gold);
+}
+.snapshot-card.worst {
+  border-top-color: var(--red);
+}
+.snapshot-period {
+  font-size: 11px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.snapshot-text {
+  font-size: 14px;
+  color: var(--text-dark);
+  line-height: 1.55;
+}
+
+/* ripple card */
+.ripple-card {
+  margin-top: 8px;
+}
+.ripple-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+.ripple-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ripple-row {
+  background: var(--card-bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-small);
+  padding: 12px 15px;
+  box-shadow: var(--shadow-small);
+}
+.ripple-area {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.ripple-text {
+  font-size: 13.5px;
+  color: var(--text-medium);
+  line-height: 1.5;
+}
+
+/* disclaimer */
+.disclaimer {
+  background: var(--card-bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-small);
+  padding: 14px 16px;
+  margin-top: 8px;
+}
+.disclaimer p {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* empty state */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+.empty-title {
+  font-size: 15px;
+  color: var(--text-medium);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.empty-text {
+  font-size: 13px;
+  color: var(--text-light);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 18px;
+  text-align: center;
+}
+.site-footer p {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* =========================================================
+   RESPONSIVE (for phones and small screens)
+   ========================================================= */
+@media (max-width: 600px) {
+  .main-content {
+    padding: 20px 14px;
+  }
+  .situation-fields {
+    flex-direction: column;
+  }
+  .snapshot-grid {
+    grid-template-columns: 1fr;
+  }
+  .help-grid {
+    grid-template-columns: 1fr;
+  }
+  .action-note {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MULTI-PAGE ADDITIONS
+   Navigation links, the 3D page stage, and the new pages.
+   ========================================================= */
+
+/* ---------- Navigation links in the header ---------- */
+.nav-links {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-small);
+  color: var(--text-medium);
+  font-size: 13px;
+  font-family: inherit;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.nav-link:hover {
+  background: var(--purple-soft);
+  color: var(--purple-dark);
+}
+.nav-link.active {
+  background: var(--purple);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(109, 95, 214, 0.35);
+}
+
+/* ---------- The 3D stage ---------- */
+/* The stage adds perspective, which is what makes the page
+   rotations look like real 3D instead of a flat slide. */
+.stage {
+  perspective: 1400px;
+  min-height: 70vh;
+}
+
+.page {
+  display: none;
+  transform-origin: center center;
+}
+.page.active {
+  display: block;
+}
+
+/* leaving page: rotates away and sinks backward */
+.page.page-leave {
+  animation: pageLeave 0.42s ease-in forwards;
+}
+@keyframes pageLeave {
+  from {
+    opacity: 1;
+    transform: rotateY(0deg) translateZ(0);
+  }
+  to {
+    opacity: 0;
+    transform: rotateY(-14deg) translateZ(-180px);
+  }
+}
+
+/* entering page: swings in from the other side */
+.page.page-enter {
+  animation: pageEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: rotateY(14deg) translateZ(-180px);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0deg) translateZ(0);
+  }
+}
+
+/* shared inner wrapper so page content is centered */
+.page-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* shared page heading styles */
+.page-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+.page-lead {
+  font-size: 16px;
+  color: var(--text-medium);
+  line-height: 1.6;
+  margin-bottom: 26px;
+  max-width: 640px;
+}
+.card-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.body-text {
+  font-size: 14px;
+  color: var(--text-medium);
+  line-height: 1.65;
+}
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+.home-hero {
+  text-align: center;
+  padding: 60px 20px 30px 20px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hero-butterfly {
+  margin-bottom: 18px;
+  /* gentle floating animation gives the hero life */
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-title {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.hero-text {
+  font-size: 16px;
+  color: var(--text-medium);
+  line-height: 1.65;
+  margin-bottom: 26px;
+}
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* the three preview cards float in 3D beneath the hero */
+.home-preview {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 30px 20px 60px 20px;
+  perspective: 1000px;
+}
+
+.preview-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-large);
+  padding: 18px;
+  width: 240px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.preview-card p {
+  font-size: 13px;
+  color: var(--text-medium);
+  line-height: 1.55;
+  margin-top: 10px;
+}
+
+/* each card is tilted slightly in 3D, and flattens on hover */
+.preview-card.tilt-left {
+  transform: rotateY(14deg) rotateX(3deg);
+}
+.preview-card.tilt-none {
+  transform: translateY(-10px);
+}
+.preview-card.tilt-right {
+  transform: rotateY(-14deg) rotateX(3deg);
+}
+.preview-card:hover {
+  transform: rotateY(0deg) rotateX(0deg) translateY(-8px);
+  box-shadow: 0 22px 50px rgba(60, 60, 110, 0.22);
+}
+
+/* =========================================================
+   ABOUT YOU PAGE
+   ========================================================= */
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  gap: 14px;
+}
+
+.about-confirm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.profile-status {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.about-note {
+  border-left: 4px solid var(--purple);
+}
+
+/* =========================================================
+   MARKETING PAGE
+   ========================================================= */
+.marketing-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-medium);
+  padding: 22px 18px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-large);
+}
+.stat-number {
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--purple);
+  margin-bottom: 6px;
+}
+.stat-text {
+  font-size: 13px;
+  color: var(--text-medium);
+  line-height: 1.5;
+}
+
+/* alternating feature rows */
+.feature-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.feature-row.reverse {
+  flex-direction: row-reverse;
+}
+.feature-text {
+  flex: 1;
+}
+
+/* the large glowing arrow visual on each feature row */
+.feature-visual {
+  width: 84px;
+  height: 84px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.best-glow {
+  background: var(--green-soft);
+  color: var(--green);
+  box-shadow: 0 8px 24px rgba(47, 158, 118, 0.25);
+}
+.likely-glow {
+  background: var(--gold-soft);
+  color: var(--gold);
+  box-shadow: 0 8px 24px rgba(192, 138, 30, 0.25);
+}
+.worst-glow {
+  background: var(--red-soft);
+  color: var(--red);
+  box-shadow: 0 8px 24px rgba(208, 90, 90, 0.25);
+}
+
+.marketing-cta {
+  text-align: center;
+  padding: 34px 20px;
+}
+.cta-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 18px;
+}
+
+/* =========================================================
+   USER GUIDE PAGE
+   ========================================================= */
+.guide-card {
+  border-left: 4px solid var(--purple);
+}
+.safety-card {
+  border-left-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+/* small link-styled button used inside guide sentences */
+.inline-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--purple);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.inline-link:hover {
+  color: var(--purple-dark);
+}
+
+/* =========================================================
+   RESPONSIVE ADDITIONS for the new pages
+   ========================================================= */
+@media (max-width: 700px) {
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .site-header {
+    flex-direction: column;
+  }
+  .hero-title {
+    font-size: 30px;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .feature-row,
+  .feature-row.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+  .preview-card.tilt-left,
+  .preview-card.tilt-right,
+  .preview-card.tilt-none {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   CINEMATIC REDESIGN
+   Full-screen layered hero, scroll reveals, and parallax.
+   ========================================================= */
+
+/* ---------- Reveal on scroll ---------- */
+/* elements start slightly lower and invisible, then rise in */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* preview cards keep their 3D tilt when revealed */
+.preview-card.reveal.visible.tilt-left  { transform: rotateY(14deg) rotateX(3deg); }
+.preview-card.reveal.visible.tilt-none  { transform: translateY(-10px); }
+.preview-card.reveal.visible.tilt-right { transform: rotateY(-14deg) rotateX(3deg); }
+
+/* ---------- The cinematic hero ---------- */
+.hero-cinematic {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* pull the hero flush against the header */
+  margin: 0;
+}
+
+/* background image layer, moved by the parallax script */
+.hero-bg {
+  position: absolute;
+  inset: -60px 0;
+  background-image: url("bg-hero.jpg");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.08);
+  will-change: transform;
+  z-index: 0;
+}
+/* dark vignette so the type stays readable */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(8, 8, 18, 0.55) 100%);
+}
+
+/* stacked title: back word, butterfly, front word */
+.hero-stack {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 40px 20px 70px 20px;
+  max-width: 760px;
+}
+
+.hero-kicker {
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: #b9b2e8;
+  margin-bottom: 18px;
+}
+
+/* the huge display words use a grand serif for the filmic look */
+.hero-word {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: clamp(52px, 11vw, 118px);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  color: #f0eefb;
+  text-shadow: 0 10px 45px rgba(0, 0, 0, 0.55);
+}
+
+/* the back word sits behind the butterfly */
+.hero-word-back {
+  position: relative;
+  z-index: 1;
+  opacity: 0.92;
+}
+
+/* the butterfly floats between the two words */
+.hero-butterfly {
+  position: relative;
+  z-index: 2;
+  width: clamp(150px, 24vw, 240px);
+  margin: -48px auto -58px auto;
+  filter: drop-shadow(0 18px 40px rgba(124, 111, 255, 0.45));
+  animation: heroFloat 5s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-butterfly svg {
+  width: 100%;
+  height: auto;
+}
+@keyframes heroFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -14px; }
+}
+
+/* the front word overlaps the butterfly's lower wings = depth */
+.hero-word-front {
+  position: relative;
+  z-index: 3;
+  margin-top: 0;
+  background: linear-gradient(180deg, #f0eefb 30%, #a99cf5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-tagline {
+  position: relative;
+  z-index: 3;
+  font-size: 16px;
+  color: #cfc9ee;
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 26px auto 30px auto;
+}
+
+/* glowing primary button variant for the dark hero */
+.primary-button.glow {
+  box-shadow: 0 0 30px rgba(124, 111, 255, 0.65), 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+.primary-button.glow:hover {
+  box-shadow: 0 0 44px rgba(124, 111, 255, 0.85), 0 10px 22px rgba(0, 0, 0, 0.5);
+}
+
+/* outlined button that works on the dark background */
+.ghost-button {
+  background: transparent;
+  color: #e6e2fa;
+  border: 1.5px solid rgba(230, 226, 250, 0.5);
+  border-radius: var(--radius-small);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 13px 24px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.ghost-button:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* animated scroll cue at the bottom of the hero */
+.scroll-cue {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(230, 226, 250, 0.55);
+  border-radius: 14px;
+}
+.scroll-cue span {
+  display: block;
+  width: 4px;
+  height: 9px;
+  background: #cfc9ee;
+  border-radius: 2px;
+  margin: 7px auto 0 auto;
+  animation: cueDrop 1.6s ease-in-out infinite;
+}
+@keyframes cueDrop {
+  0% { opacity: 1; transform: translateY(0); }
+  70% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+
+/* ---------- Preview band with the mist background ---------- */
+.home-preview-band {
+  background-image: url("bg-mist.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 66px 20px 70px 20px;
+  text-align: center;
+}
+.band-label {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--purple-dark);
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+.band-cta {
+  margin-top: 34px;
+}
+
+/* header gets a touch of transparency over the hero */
+.site-header {
+  background: rgba(251, 251, 255, 0.82);
+}
+
+/* responsive: hero words scale via clamp already; tighten spacing */
+@media (max-width: 700px) {
+  .hero-butterfly {
+    margin: -28px auto -36px auto;
+  }
+  .hero-cinematic {
+    min-height: 84vh;
+  }
+}
+
+/* =========================================================
+   CINEMATIC UPGRADE PACK
+   Deeper 3D page transitions, the butterfly path-splash,
+   and a richer, staggered results presentation.
+   ========================================================= */
+
+/* ---------- Deeper 3D page transitions ---------- */
+/* These redefine the earlier keyframes; the browser uses the
+   last definition, so these win. The page now swings much
+   further into 3D space and picks up motion blur. */
+@keyframes pageLeave {
+  from {
+    opacity: 1;
+    transform: rotateY(0deg) rotateX(0deg) translateZ(0) translateX(0);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: rotateY(-30deg) rotateX(7deg) translateZ(-420px) translateX(-9%);
+    filter: blur(7px);
+  }
+}
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: rotateY(28deg) rotateX(-5deg) translateZ(-420px) translateX(9%);
+    filter: blur(9px);
+  }
+  60% {
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg) rotateX(0deg) translateZ(0) translateX(0);
+  }
+}
+.page.page-leave {
+  animation: pageLeave 0.52s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+.page.page-enter {
+  animation: pageEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- The butterfly path splash ---------- */
+/* A full-screen moment: dark backdrop, the butterfly flaps
+   its wings with expanding light rings beneath it. */
+.path-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(109, 95, 214, 0.28), transparent 55%),
+    rgba(10, 10, 22, 0.94);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+.path-splash.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.splash-butterfly {
+  width: 190px;
+  filter: drop-shadow(0 0 34px rgba(124, 111, 255, 0.65));
+  animation: splashRise 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.splash-butterfly svg {
+  width: 100%;
+  height: auto;
+}
+@keyframes splashRise {
+  from {
+    transform: translateY(46px) scale(0.72);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* the wings hinge at the body and flap in 3D */
+.wing {
+  transform-box: fill-box;
+}
+.wing-left {
+  transform-origin: right center;
+  animation: flapLeft 0.85s ease-in-out infinite;
+}
+.wing-right {
+  transform-origin: left center;
+  animation: flapRight 0.85s ease-in-out infinite;
+}
+@keyframes flapLeft {
+  0%, 100% { transform: rotateY(0deg); }
+  50% { transform: rotateY(52deg); }
+}
+@keyframes flapRight {
+  0%, 100% { transform: rotateY(0deg); }
+  50% { transform: rotateY(-52deg); }
+}
+
+.splash-text {
+  margin-top: 26px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #cfc9ee;
+  animation: splashTextPulse 1.5s ease-in-out infinite;
+}
+@keyframes splashTextPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* expanding rings radiate from beneath the butterfly */
+.splash-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+}
+.splash-rings span {
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 120px;
+  height: 120px;
+  border: 1.5px solid rgba(124, 111, 255, 0.5);
+  border-radius: 50%;
+  animation: ringGrow 2s ease-out infinite;
+}
+.splash-rings span:nth-child(2) { animation-delay: 0.55s; }
+.splash-rings span:nth-child(3) { animation-delay: 1.1s; }
+@keyframes ringGrow {
+  from {
+    transform: scale(0.4);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(3.4);
+    opacity: 0;
+  }
+}
+
+/* ---------- Cinematic results presentation ---------- */
+
+/* the decision summary becomes a dark cinematic banner */
+.summary-card {
+  background:
+    radial-gradient(circle at 12% 20%, rgba(124, 111, 255, 0.30), transparent 55%),
+    linear-gradient(135deg, #1c1a33, #12101f);
+  border: 1px solid rgba(124, 111, 255, 0.35);
+  border-left: 4px solid var(--purple);
+  box-shadow: 0 14px 40px rgba(28, 26, 51, 0.45);
+}
+.summary-card .summary-label {
+  color: #b9b2e8;
+}
+.summary-card .summary-text {
+  color: #f0eefb;
+  font-size: 17px;
+}
+
+/* period titles become cinematic dividers */
+.period-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--purple-dark);
+  border-bottom: none;
+  margin: 30px 0 14px 0;
+}
+.period-title::before,
+.period-title::after {
+  content: "";
+  height: 1.5px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(109, 95, 214, 0.45), transparent);
+}
+
+/* path cards: staggered 3D entrance, richer surfaces, glow on hover */
+.path-card {
+  opacity: 0;
+  animation: cardIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px) rotateX(9deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+/* a soft tinted wash sweeps in from the colored edge */
+.path-card.best {
+  background: linear-gradient(100deg, rgba(47, 158, 118, 0.07), var(--card-bg) 45%);
+}
+.path-card.likely {
+  background: linear-gradient(100deg, rgba(192, 138, 30, 0.07), var(--card-bg) 45%);
+}
+.path-card.worst {
+  background: linear-gradient(100deg, rgba(208, 90, 90, 0.07), var(--card-bg) 45%);
+}
+
+.path-card.best:hover {
+  box-shadow: 0 16px 40px rgba(47, 158, 118, 0.28);
+  border-left-color: var(--green);
+}
+.path-card.likely:hover {
+  box-shadow: 0 16px 40px rgba(192, 138, 30, 0.28);
+}
+.path-card.worst:hover {
+  box-shadow: 0 16px 40px rgba(208, 90, 90, 0.28);
+}
+
+/* the arrow icon sits in a colored coin */
+.path-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 15px;
+}
+.path-icon.best {
+  background: var(--green-soft);
+  box-shadow: 0 3px 10px rgba(47, 158, 118, 0.3);
+}
+.path-icon.likely {
+  background: var(--gold-soft);
+  box-shadow: 0 3px 10px rgba(192, 138, 30, 0.3);
+}
+.path-icon.worst {
+  background: var(--red-soft);
+  box-shadow: 0 3px 10px rgba(208, 90, 90, 0.3);
+}
+
+/* snapshot cards share the staggered entrance */
+.snapshot-card {
+  opacity: 0;
+  animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ripple rows rise in one after another with a colored chip */
+.ripple-row {
+  opacity: 0;
+  animation: cardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  border-left: 3px solid var(--purple);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.ripple-row:hover {
+  transform: translateX(6px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* legend gets a subtle glass feel */
+.legend {
+  background: rgba(251, 251, 255, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+/* =========================================================
+   PREMIUM UPGRADE PACK
+   Glass stat chips, marquee, showcase gallery, scenarios,
+   creator section, film grain, and micro-interactions.
+   ========================================================= */
+
+/* ---------- film grain over the whole site (cinematic) ---------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- hero stack becomes a 3D object under the cursor ---------- */
+.hero-cinematic {
+  perspective: 1100px;
+}
+.hero-stack {
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out;
+  will-change: transform;
+}
+
+/* ---------- floating glass stat chips ---------- */
+.glass-chips {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.glass-chip {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.35);
+  animation: chipFloat 6s ease-in-out infinite;
+}
+.chip-num {
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+.chip-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #b9b2e8;
+}
+.chip-1 { top: 6%;  left: -8%;  animation-delay: 0s; }
+.chip-2 { top: 20%; right: -10%; animation-delay: 1.4s; }
+.chip-3 { bottom: 30%; left: -11%; animation-delay: 2.8s; }
+.chip-4 { bottom: 16%; right: -7%; animation-delay: 4.2s; }
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@media (max-width: 900px) {
+  .glass-chips { display: none; }
+}
+
+/* ---------- infinite marquee ticker ---------- */
+.marquee {
+  overflow: hidden;
+  background: #12101f;
+  border-top: 1px solid rgba(124, 111, 255, 0.25);
+  border-bottom: 1px solid rgba(124, 111, 255, 0.25);
+  padding: 14px 0;
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  width: max-content;
+  animation: marqueeSlide 22s linear infinite;
+}
+.marquee-track span {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 5px;
+  color: #cfc9ee;
+  white-space: nowrap;
+}
+.marquee-track i {
+  color: var(--purple);
+  font-style: normal;
+  font-size: 13px;
+}
+@keyframes marqueeSlide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- section numbers (editorial, like the reference) ---------- */
+.section-number {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--purple-dark);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.section-number.light {
+  color: #b9b2e8;
+}
+
+/* ---------- SHOWCASE: stacked, tilted browser windows ---------- */
+.showcase {
+  padding: 74px 20px 40px 20px;
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.showcase-title {
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 5vw, 46px);
+  color: var(--text-dark);
+  line-height: 1.12;
+  margin-bottom: 44px;
+}
+.showcase-title em {
+  color: var(--purple);
+}
+
+.mock-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  perspective: 1400px;
+  min-height: 340px;
+}
+.mock-window {
+  width: 300px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 26px 70px rgba(30, 28, 60, 0.30);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, z-index 0s;
+  position: relative;
+}
+.mock-a { transform: rotateY(24deg) translateX(34px) scale(0.92); z-index: 1; }
+.mock-b { transform: translateY(-16px) translateZ(60px); z-index: 3; }
+.mock-c { transform: rotateY(-24deg) translateX(-34px) scale(0.92); z-index: 1; }
+.mock-window:hover {
+  transform: rotateY(0deg) translateX(0) translateY(-20px) scale(1.02);
+  z-index: 5;
+  box-shadow: 0 40px 90px rgba(30, 28, 60, 0.42);
+}
+
+.mock-bar {
+  display: flex;
+  gap: 6px;
+  padding: 9px 12px;
+  background: var(--card-bg-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+.mock-bar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d9d9e8;
+}
+.mock-bar span:first-child { background: #f0a3a3; }
+.mock-bar span:nth-child(2) { background: #f0d9a3; }
+.mock-bar span:nth-child(3) { background: #a3d9b8; }
+
+.mock-body {
+  padding: 16px;
+  text-align: left;
+}
+.mock-period {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.mock-path {
+  border-left: 3px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-bg-soft);
+  padding: 10px 12px;
+  margin-bottom: 9px;
+}
+.mock-path b {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 4px;
+}
+.mock-path.best { border-left-color: var(--green); }
+.mock-path.best b { color: var(--green); }
+.mock-path.likely { border-left-color: var(--gold); }
+.mock-path.likely b { color: var(--gold); }
+.mock-path p {
+  font-size: 11px;
+  color: var(--text-medium);
+  line-height: 1.5;
+}
+.mock-dark {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(109, 95, 214, 0.35), transparent 60%),
+    #12101f;
+  text-align: center;
+  padding: 34px 16px;
+}
+.mock-fly {
+  animation: heroFloat 4s ease-in-out infinite;
+  display: inline-block;
+}
+.mock-splash-text {
+  margin-top: 14px;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #cfc9ee;
+}
+.mock-ripple {
+  background: var(--card-bg-soft);
+  border-left: 3px solid var(--purple);
+  border-radius: 8px;
+  padding: 9px 12px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: var(--text-medium);
+}
+.mock-ripple b {
+  color: var(--purple);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 3px;
+}
+@media (max-width: 820px) {
+  .mock-stage { flex-direction: column; gap: 22px; }
+  .mock-a, .mock-b, .mock-c { transform: none; }
+}
+
+/* ---------- SCENARIOS: real-life decision band ---------- */
+.scenarios {
+  margin-top: 50px;
+  padding: 70px 20px 80px 20px;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(124, 111, 255, 0.25), transparent 50%),
+    radial-gradient(circle at 85% 80%, rgba(45, 180, 170, 0.15), transparent 50%),
+    #14121f;
+  text-align: center;
+}
+.scenarios-title {
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 4.4vw, 40px);
+  color: #f0eefb;
+  margin-bottom: 40px;
+}
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.scenario-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  padding: 24px 20px;
+  text-align: left;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+.scenario-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(124, 111, 255, 0.55);
+  background: rgba(124, 111, 255, 0.10);
+}
+.scenario-tag {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #a99cf5;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.scenario-text {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  color: #d8d4ef;
+  line-height: 1.65;
+}
+.scenarios .band-cta {
+  margin-top: 44px;
+}
+
+/* ---------- CREATOR SECTION on the About page ---------- */
+.creator-card {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(124, 111, 255, 0.22), transparent 50%),
+    linear-gradient(135deg, #1c1a33, #12101f);
+  border: 1px solid rgba(124, 111, 255, 0.3);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 50px rgba(28, 26, 51, 0.4);
+  padding: 32px;
+  margin-bottom: 10px;
+}
+.creator-photo {
+  flex-shrink: 0;
+  width: 170px;
+  height: 200px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+.creator-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(124, 111, 255, 0.25), transparent 65%),
+    #181630;
+}
+.photo-placeholder span {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #8a82c4;
+  text-align: center;
+  line-height: 1.8;
+}
+.creator-name {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  color: #f0eefb;
+  margin-bottom: 12px;
+}
+.creator-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.creator-tag {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #c4bdff;
+  border: 1px solid rgba(196, 189, 255, 0.4);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+.creator-bio {
+  font-size: 14.5px;
+  color: #cfc9ee;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+@media (max-width: 700px) {
+  .creator-card { flex-direction: column; align-items: center; text-align: center; }
+  .creator-tags { justify-content: center; }
+  .creator-bio { text-align: left; }
+}
+
+/* ---------- button shine micro-interaction ---------- */
+.primary-button {
+  position: relative;
+  overflow: hidden;
+}
+.primary-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+.primary-button:hover::after {
+  left: 130%;
+}
+
+/* =========================================================
+   PERFORMANCE + SCROLL-ZOOM PACK
+   Removes GPU-heavy effects that caused lag, fixes the chip
+   positions, and rebuilds all motion around cinematic zoom.
+   ========================================================= */
+
+/* ---------- lag fixes ---------- */
+/* backdrop-filter was the main cost: replaced with solid
+   translucent surfaces that look the same but render cheap */
+.glass-chip {
+  backdrop-filter: none;
+  background: rgba(30, 27, 58, 0.55);
+}
+.scenario-card {
+  backdrop-filter: none;
+  background: rgba(255, 255, 255, 0.06);
+}
+.legend {
+  backdrop-filter: none;
+  background: rgba(251, 251, 255, 0.92);
+}
+.site-header {
+  backdrop-filter: none;
+  background: rgba(251, 251, 255, 0.95);
+}
+.path-splash {
+  backdrop-filter: none;
+}
+/* film grain: GPU-promoted and lightened so it never repaints */
+body::after {
+  opacity: 0.22;
+  transform: translateZ(0);
+}
+/* hero layers get their own compositor layers */
+.hero-bg, .hero-stack, .hero-butterfly {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ---------- chip positions: safely inside the hero ---------- */
+.glass-chips {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.glass-chip.chip-1 { top: 16%;   left: 6%;  right: auto; bottom: auto; }
+.glass-chip.chip-2 { top: 24%;   right: 6%; left: auto;  bottom: auto; }
+.glass-chip.chip-3 { bottom: 26%; left: 8%; top: auto;   right: auto; }
+.glass-chip.chip-4 { bottom: 18%; right: 8%; top: auto;  left: auto; }
+@media (max-width: 1050px) {
+  .glass-chip.chip-1 { left: 2%; }
+  .glass-chip.chip-2 { right: 2%; }
+  .glass-chip.chip-3 { left: 3%; }
+  .glass-chip.chip-4 { right: 3%; }
+}
+
+/* ---------- scroll-zoom motion language ---------- */
+/* the hero-stack transform is now driven per-frame by JS;
+   remove the transition so scrubbing feels direct */
+.hero-stack {
+  transition: none;
+}
+
+/* sections now ZOOM in as they enter the viewport */
+.reveal {
+  opacity: 0;
+  transform: scale(0.90) translateY(18px);
+  transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.preview-card.reveal.visible.tilt-left  { transform: rotateY(14deg) rotateX(3deg) scale(1); }
+.preview-card.reveal.visible.tilt-none  { transform: translateY(-10px) scale(1); }
+.preview-card.reveal.visible.tilt-right { transform: rotateY(-14deg) rotateX(3deg) scale(1); }
+
+/* ---------- page transitions become a ZOOM-THROUGH ---------- */
+/* leaving: the page grows toward the camera and dissolves,
+   entering: the next page rises from small to full size */
+@keyframes pageLeave {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.82) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.page.page-leave {
+  animation: pageLeave 0.45s cubic-bezier(0.55, 0, 0.85, 0.4) forwards;
+  transform-origin: center 34%;
+}
+.page.page-enter {
+  animation: pageEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center 40%;
+}
+
+/* card entrances join the zoom language (subtle) */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* =========================================================
+   BUTTERFLY FLIGHT PATH
+   The butterfly leaves the center, wanders the hero, then
+   returns and settles. The outer wrapper flies; the inner
+   element keeps its own bob, so the two never fight.
+   ========================================================= */
+
+.butterfly-flight {
+  display: inline-block;
+  animation: butterflyFlight 18s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* The path: rest at center, drift out and around, come home.
+   Rotation leans into each turn and scale sells the depth. */
+@keyframes butterflyFlight {
+  /* settle at center */
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  /* lift away to the upper right */
+  12% {
+    transform: translate(120px, -54px) rotate(11deg) scale(0.90);
+  }
+  /* out to the right edge, small = far away */
+  24% {
+    transform: translate(215px, 20px) rotate(-7deg) scale(0.80);
+  }
+  /* sweep down and back across the middle */
+  38% {
+    transform: translate(90px, 92px) rotate(-15deg) scale(0.92);
+  }
+  /* cross to the left side */
+  52% {
+    transform: translate(-115px, 60px) rotate(12deg) scale(1.02);
+  }
+  /* climb the left edge */
+  66% {
+    transform: translate(-210px, -38px) rotate(8deg) scale(0.84);
+  }
+  /* arc over the top, heading home */
+  78% {
+    transform: translate(-80px, -80px) rotate(-9deg) scale(0.94);
+  }
+  /* glide back in, slightly past center */
+  88% {
+    transform: translate(24px, -16px) rotate(-4deg) scale(1.04);
+  }
+  /* home, and rest here before the next loop */
+  96%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+}
+
+/* Narrower screens get a smaller flight path so the butterfly
+   never flies out of view or over the text. */
+@media (max-width: 900px) {
+  @keyframes butterflyFlight {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+    12%  { transform: translate(62px, -34px) rotate(9deg) scale(0.92); }
+    24%  { transform: translate(104px, 14px) rotate(-6deg) scale(0.85); }
+    38%  { transform: translate(46px, 58px) rotate(-12deg) scale(0.94); }
+    52%  { transform: translate(-58px, 40px) rotate(10deg) scale(1.01); }
+    66%  { transform: translate(-102px, -24px) rotate(7deg) scale(0.88); }
+    78%  { transform: translate(-42px, -50px) rotate(-7deg) scale(0.95); }
+    88%  { transform: translate(14px, -10px) rotate(-3deg) scale(1.03); }
+    96%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  }
+}
+
+/* Pause the flight while the cursor is in the hero, so the
+   mouse-tilt effect and the buttons stay easy to use. */
+.hero-cinematic:hover .butterfly-flight {
+  animation-play-state: paused;
+}
+
+/* Respect users who ask their system to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  .butterfly-flight {
+    animation: none;
+  }
+  .hero-butterfly {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   FULL DARK THEME — mirroring the recorded site
+   One cohesive dark experience end to end: deep indigo
+   surfaces, light text, gradient accents, pill controls.
+   Overrides the earlier light content theme.
+   ========================================================= */
+
+/* ---------- global surfaces ---------- */
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(109, 95, 214, 0.16), transparent 42%),
+    radial-gradient(circle at 88% 30%, rgba(45, 180, 170, 0.10), transparent 45%),
+    linear-gradient(170deg, #0c0b18, #090812);
+  color: #e7e4f6;
+}
+
+/* modern sans display across the site (recording uses sans, not serif) */
+.hero-word, .showcase-title, .scenarios-title, .creator-name,
+.page-title, .cta-title, .hero-title {
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+.hero-word-front {
+  background: linear-gradient(92deg, #f0eefb 10%, #a99cf5 55%, #5fd3c7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.marquee-track span, .scenario-text {
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+}
+.scenario-text { font-style: normal; }
+
+/* ---------- nav: floating pill ---------- */
+.site-header {
+  background: rgba(16, 14, 30, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.site-title { color: #f0eefb; }
+.site-subtitle { color: #8a82c4; }
+.nav-links {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 100px;
+  padding: 4px;
+}
+.nav-link { color: #b6b0da; border-radius: 100px; }
+.nav-link:hover { background: rgba(124, 111, 255, 0.18); color: #e7e4f6; }
+.nav-link.active {
+  background: linear-gradient(135deg, #6d5fd6, #8b7cf0);
+  color: #ffffff;
+}
+
+/* ---------- all cards go translucent-on-dark ---------- */
+.card, .preview-card, .stat-card, .guide-card, .help-card,
+.snapshot-card, .ripple-row, .mock-window {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
+  color: #e7e4f6;
+}
+.path-card {
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
+}
+.path-card.best   { background: linear-gradient(100deg, rgba(47,158,118,0.14), rgba(255,255,255,0.04) 45%); }
+.path-card.likely { background: linear-gradient(100deg, rgba(192,138,30,0.14), rgba(255,255,255,0.04) 45%); }
+.path-card.worst  { background: linear-gradient(100deg, rgba(208,90,90,0.14), rgba(255,255,255,0.04) 45%); }
+
+/* text roles on dark */
+.page-title, .card-heading, .ripple-title, .summary-text,
+.path-text, .snapshot-text, .empty-title, .field-label,
+.showcase-title { color: #f0eefb; }
+.page-lead, .body-text, .ripple-text, .legend-text, .legend-item,
+.empty-text, .small-label, .action-note, .char-count,
+.snapshot-period, .mock-path p, .preview-card p, .stat-text { color: #a9a3cc; }
+.period-title { color: #a99cf5; }
+.section-number { color: #a99cf5; }
+.showcase-title em { color: #8b7cf0; }
+
+/* inputs on dark */
+.decision-input, .text-input {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #f0eefb;
+  box-shadow: none;
+}
+.decision-input:focus, .text-input:focus {
+  border-color: #8b7cf0;
+  box-shadow: 0 0 0 3px rgba(124, 111, 255, 0.22);
+}
+.decision-input::placeholder, .text-input::placeholder { color: #6f6a96; }
+
+/* chips / small buttons */
+.example-button, .category-button, .header-button, .secondary-button {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #b6b0da;
+  box-shadow: none;
+}
+.example-button:hover, .category-button:hover,
+.header-button:hover, .secondary-button:hover {
+  border-color: #8b7cf0;
+  color: #e7e4f6;
+}
+.category-button.active {
+  background: rgba(124, 111, 255, 0.22);
+  border-color: #8b7cf0;
+  color: #cfc9f5;
+}
+
+/* pill gradient primary buttons (matches the recording) */
+.primary-button, .ghost-button, .secondary-button,
+.header-button, .view-button, .snap-button {
+  border-radius: 100px;
+}
+.primary-button {
+  background: linear-gradient(135deg, #6d5fd6, #8b7cf0);
+}
+
+/* view toggles */
+.view-toggle, .snapshot-buttons {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.view-button, .snap-button { color: #b6b0da; }
+.view-button.active { background: linear-gradient(135deg, #6d5fd6, #8b7cf0); }
+
+/* legend, disclaimer, toggles */
+.legend { background: rgba(255, 255, 255, 0.045); border-color: rgba(255,255,255,0.10); }
+.disclaimer { background: rgba(255, 255, 255, 0.035); border-color: rgba(255,255,255,0.08); }
+.disclaimer p { color: #8f89b8; }
+.situation-toggle { color: #a99cf5; }
+.validation-message { color: #f28b8b; }
+
+/* bands that were light: preview band + mist */
+.home-preview-band {
+  background:
+    radial-gradient(circle at 20% 25%, rgba(124, 111, 255, 0.14), transparent 50%),
+    #0e0d1c;
+}
+.band-label { color: #a99cf5; }
+
+/* mock windows on dark */
+.mock-bar { background: rgba(255, 255, 255, 0.05); border-color: rgba(255,255,255,0.08); }
+.mock-path, .mock-ripple { background: rgba(255, 255, 255, 0.05); color: #a9a3cc; }
+.mock-period { color: #8f89b8; }
+
+/* summary card & creator card already dark — align borders */
+.summary-card, .creator-card { border-color: rgba(139, 124, 240, 0.4); }
+
+/* about page notes */
+.about-note { background: rgba(255, 255, 255, 0.045); }
+.profile-status { color: #8f89b8; }
+.about-confirm { border-top-color: rgba(255,255,255,0.10); }
+
+/* safety card on guide page */
+.safety-card { background: rgba(192, 138, 30, 0.10); border-left-color: #c08a1e; }
+
+/* footer */
+.site-footer { border-top-color: rgba(255,255,255,0.08); }
+.site-footer p { color: #6f6a96; }
+
+/* scrollbar */
+::-webkit-scrollbar-thumb { background: #2c2950; }
+
+/* hero + scenarios keep their dark art; ensure contrast pieces stay */
+.hero-bg::after {
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(6, 6, 14, 0.6) 100%);
+}
+
+/* =========================================================
+   SMOOTHNESS PACK
+   Compositor hints for the page transitions and lighter
+   repaint load while scrolling.
+   ========================================================= */
+
+/* page transitions: promote to their own GPU layer while
+   animating, shorter durations, and paint containment so the
+   browser only repaints the moving page, not the whole site */
+.page.page-leave,
+.page.page-enter {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  contain: paint;
+}
+.page.page-leave {
+  animation-duration: 0.38s;
+}
+.page.page-enter {
+  animation-duration: 0.6s;
+}
+
+/* film grain: fully composited so it never repaints on scroll */
+body::after {
+  will-change: transform;
+  backface-visibility: hidden;
+  contain: strict;
+}
+
+/* heavy card shadows are the other scroll cost on dark themes —
+   soften them slightly; visually identical, cheaper to paint */
+.card, .preview-card, .stat-card, .guide-card,
+.snapshot-card, .ripple-row, .mock-window, .path-card {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+}
+
+/* the marquee gets its own layer so it never forces reflow */
+.marquee-track {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* stat numbers reserve width so the count-up never makes the
+   layout jump while the number grows */
+.stat-number, .chip-num {
+  font-variant-numeric: tabular-nums;
+  min-width: 2ch;
+  display: inline-block;
+}
+
+/* =========================================================
+   OVERLAPPED PAGE TRANSITION + PHOTO FRAMING
+   ========================================================= */
+
+/* the stage anchors the leaving page so both pages can
+   animate at the same time in the same space */
+.stage {
+  position: relative;
+}
+.page.page-leave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* creator photo: fill the frame, favor the face */
+.creator-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
+  display: block;
+}
+
+/* =========================================================
+   FINAL POLISH PACK
+   ========================================================= */
+
+/* 1. butterfly flight removed — it stays centered with only
+   its original gentle bob */
+.butterfly-flight {
+  animation: none;
+}
+.hero-cinematic:hover .butterfly-flight {
+  animation: none;
+}
+
+/* 2. homepage chips show their numbers statically (the JS no
+   longer counts them; nothing needed here, kept for clarity) */
+
+/* 3. Why It Works closing CTA: light text inside a floating
+   glass card like the rest of the page */
+.marketing-cta {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+  padding: 44px 28px;
+  margin-top: 10px;
+}
+.cta-title {
+  color: #f0eefb;
+}
+
+/* 4. transitions: smaller zoom = far cheaper to render and
+   feels immediate rather than heavy */
+@keyframes pageLeave {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(1.12); }
+}
+@keyframes pageEnter {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.page.page-leave {
+  animation-duration: 0.26s;
+  animation-timing-function: ease-in;
+}
+.page.page-enter {
+  animation-duration: 0.42s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* society-need strip shares the scenarios' dark band styling */
+.society-strip {
+  padding: 70px 20px 80px 20px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(124, 111, 255, 0.18), transparent 50%),
+    #100e1d;
+  text-align: center;
+}
+
+/* =========================================================
+   MARKETING PAGE ADDITIONS
+   Testimonials, pricing tiers, and FAQ in the site's
+   existing dark glass language.
+   ========================================================= */
+
+/* testimonials */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+.testimonial-card {
+  padding: 22px 20px;
+}
+.testimonial-text {
+  font-size: 14.5px;
+  color: #d8d4ef;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.testimonial-name {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #a99cf5;
+  font-weight: 700;
+}
+
+/* pricing */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.price-card {
+  text-align: center;
+  padding: 30px 24px;
+}
+.price-card.featured {
+  border-color: rgba(139, 124, 240, 0.55);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(124, 111, 255, 0.16), transparent 60%),
+    rgba(255, 255, 255, 0.045);
+}
+.price-tier {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #a99cf5;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.price-amount {
+  font-size: 44px;
+  font-weight: 800;
+  color: #f0eefb;
+  line-height: 1;
+}
+.price-note {
+  font-size: 12px;
+  color: #8f89b8;
+  margin: 8px 0 18px;
+}
+.price-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  text-align: left;
+}
+.price-list li {
+  font-size: 13px;
+  color: #a9a3cc;
+  padding: 7px 0 7px 24px;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.price-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 2px;
+  color: #2f9e76;
+  font-weight: 700;
+}
+
+/* FAQ (native accordion, no JS needed) */
+.faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.faq-item {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.faq-item summary {
+  cursor: pointer;
+  padding: 16px 20px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #f0eefb;
+  list-style: none;
+  position: relative;
+  padding-right: 44px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a99cf5;
+  font-size: 20px;
+  font-weight: 400;
+  transition: transform 0.25s ease;
+}
+.faq-item[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+.faq-item p {
+  padding: 0 20px 16px;
+  font-size: 13.5px;
+  color: #a9a3cc;
+  line-height: 1.7;
+}

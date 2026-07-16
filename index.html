@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Butterfly Effect - Decision Path Modeling</title>
+  <link rel="stylesheet" href="butterfly-effect.css" />
+</head>
+
+<body>
+
+  <!-- ============================================ -->
+  <!-- NAVIGATION BAR (stays on top of every page)  -->
+  <!-- ============================================ -->
+  <header class="site-header">
+    <div class="header-left" onclick="goToPage('home')" style="cursor: pointer;">
+      <div class="logo-box">
+        <svg width="26" height="26" viewBox="30 45 140 130" fill="none">
+  <!-- left wings (black) -->
+  <path d="M 98.0 97.0 L 98.2 95.8 L 98.2 94.6 L 98.1 93.2 L 97.8 91.8 L 97.3 90.3 L 96.8 88.7 L 96.2 87.1 L 95.4 85.4 L 94.6 83.7 L 93.7 81.9 L 92.7 80.2 L 91.7 78.4 L 90.6 76.7 L 89.4 74.9 L 88.2 73.3 L 87.0 71.6 L 85.6 70.1 L 84.3 68.7 L 82.9 67.4 L 81.5 66.2 L 80.0 65.1 L 78.5 64.2 L 77.0 63.5 L 75.5 63.0 L 73.9 62.7 L 72.4 62.6 L 70.8 62.7 L 69.3 63.0 L 67.7 63.5 L 66.2 64.3 L 64.7 65.2 L 63.2 66.3 L 61.8 67.7 L 60.4 69.2 L 59.1 70.8 L 57.9 72.6 L 56.7 74.6 L 55.7 76.6 L 54.7 78.7 L 53.8 80.9 L 53.1 83.2 L 52.5 85.4 L 52.0 87.7 L 51.6 89.9 L 51.4 92.1 L 51.3 94.2 L 51.4 96.2 L 51.7 98.1 L 52.1 99.9 L 52.6 101.6 L 53.3 103.2 L 54.1 104.6 L 55.1 105.8 L 56.3 106.9 L 57.5 107.8 L 58.9 108.5 L 60.4 109.1 L 62.0 109.6 L 63.7 109.9 L 65.5 110.0 L 67.4 110.0 L 69.3 109.9 L 71.3 109.7 L 73.2 109.3 L 75.3 108.9 L 77.3 108.4 L 79.3 107.8 L 81.2 107.2 L 83.2 106.5 L 85.0 105.8 L 86.8 105.0 L 88.6 104.2 L 90.2 103.4 L 91.8 102.6 L 93.2 101.7 L 94.5 100.9 L 95.6 100.0 L 96.6 99.0 L 97.4 98.0 L 98.0 97.0 Z" stroke="#ffffff" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M 98.0 104.0 L 97.4 103.2 L 96.6 102.5 L 95.8 101.8 L 94.8 101.2 L 93.6 100.6 L 92.4 100.0 L 91.1 99.4 L 89.8 98.9 L 88.3 98.4 L 86.8 98.0 L 85.3 97.5 L 83.7 97.2 L 82.1 96.8 L 80.5 96.5 L 78.9 96.3 L 77.3 96.1 L 75.7 96.0 L 74.2 96.0 L 72.7 96.0 L 71.2 96.2 L 69.9 96.5 L 68.6 96.9 L 67.4 97.4 L 66.4 98.0 L 65.4 98.7 L 64.5 99.6 L 63.8 100.5 L 63.2 101.6 L 62.8 102.8 L 62.4 104.1 L 62.3 105.6 L 62.2 107.1 L 62.3 108.7 L 62.5 110.3 L 62.8 112.0 L 63.3 113.8 L 63.9 115.6 L 64.5 117.4 L 65.3 119.1 L 66.2 120.9 L 67.2 122.6 L 68.2 124.3 L 69.3 125.8 L 70.5 127.3 L 71.7 128.7 L 72.9 129.9 L 74.2 131.0 L 75.4 132.0 L 76.7 132.8 L 78.0 133.4 L 79.3 133.9 L 80.5 134.2 L 81.8 134.3 L 83.0 134.2 L 84.2 134.0 L 85.3 133.6 L 86.4 133.1 L 87.5 132.4 L 88.5 131.5 L 89.5 130.5 L 90.4 129.4 L 91.3 128.2 L 92.2 127.0 L 93.0 125.6 L 93.7 124.2 L 94.4 122.7 L 95.1 121.2 L 95.7 119.7 L 96.2 118.1 L 96.8 116.6 L 97.2 115.1 L 97.6 113.7 L 97.9 112.2 L 98.2 110.9 L 98.4 109.5 L 98.5 108.3 L 98.6 107.1 L 98.5 106.0 L 98.3 104.9 L 98.0 104.0 Z" stroke="#ffffff" stroke-width="3.4" stroke-linejoin="round"/>
+  <!-- right wings (purple) -->
+  <path d="M 102.0 97.0 L 102.6 98.0 L 103.4 99.0 L 104.4 100.0 L 105.5 100.9 L 106.8 101.7 L 108.2 102.6 L 109.8 103.4 L 111.4 104.2 L 113.2 105.0 L 115.0 105.8 L 116.8 106.5 L 118.8 107.2 L 120.7 107.8 L 122.7 108.4 L 124.7 108.9 L 126.8 109.3 L 128.7 109.7 L 130.7 109.9 L 132.6 110.0 L 134.5 110.0 L 136.3 109.9 L 138.0 109.6 L 139.6 109.1 L 141.1 108.5 L 142.5 107.8 L 143.7 106.9 L 144.9 105.8 L 145.9 104.6 L 146.7 103.2 L 147.4 101.6 L 147.9 99.9 L 148.3 98.1 L 148.6 96.2 L 148.7 94.2 L 148.6 92.1 L 148.4 89.9 L 148.0 87.7 L 147.5 85.4 L 146.9 83.2 L 146.2 80.9 L 145.3 78.7 L 144.3 76.6 L 143.3 74.6 L 142.1 72.6 L 140.9 70.8 L 139.6 69.2 L 138.2 67.7 L 136.8 66.3 L 135.3 65.2 L 133.8 64.3 L 132.3 63.5 L 130.7 63.0 L 129.2 62.7 L 127.6 62.6 L 126.1 62.7 L 124.5 63.0 L 123.0 63.5 L 121.5 64.2 L 120.0 65.1 L 118.5 66.2 L 117.1 67.4 L 115.7 68.7 L 114.4 70.1 L 113.0 71.6 L 111.8 73.3 L 110.6 74.9 L 109.4 76.7 L 108.3 78.4 L 107.3 80.2 L 106.3 81.9 L 105.4 83.7 L 104.6 85.4 L 103.8 87.1 L 103.2 88.7 L 102.7 90.3 L 102.2 91.8 L 101.9 93.2 L 101.8 94.6 L 101.8 95.8 L 102.0 97.0 Z" stroke="#7c6fff" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M 102.0 104.0 L 101.7 104.9 L 101.5 106.0 L 101.4 107.1 L 101.5 108.3 L 101.6 109.5 L 101.8 110.9 L 102.1 112.2 L 102.4 113.7 L 102.8 115.1 L 103.2 116.6 L 103.8 118.1 L 104.3 119.7 L 104.9 121.2 L 105.6 122.7 L 106.3 124.2 L 107.0 125.6 L 107.8 127.0 L 108.7 128.2 L 109.6 129.4 L 110.5 130.5 L 111.5 131.5 L 112.5 132.4 L 113.6 133.1 L 114.7 133.6 L 115.8 134.0 L 117.0 134.2 L 118.2 134.3 L 119.5 134.2 L 120.7 133.9 L 122.0 133.4 L 123.3 132.8 L 124.6 132.0 L 125.8 131.0 L 127.1 129.9 L 128.3 128.7 L 129.5 127.3 L 130.7 125.8 L 131.8 124.3 L 132.8 122.6 L 133.8 120.9 L 134.7 119.1 L 135.5 117.4 L 136.1 115.6 L 136.7 113.8 L 137.2 112.0 L 137.5 110.3 L 137.7 108.7 L 137.8 107.1 L 137.7 105.6 L 137.6 104.1 L 137.2 102.8 L 136.8 101.6 L 136.2 100.5 L 135.5 99.6 L 134.6 98.7 L 133.6 98.0 L 132.6 97.4 L 131.4 96.9 L 130.1 96.5 L 128.8 96.2 L 127.3 96.0 L 125.8 96.0 L 124.3 96.0 L 122.7 96.1 L 121.1 96.3 L 119.5 96.5 L 117.9 96.8 L 116.3 97.2 L 114.7 97.5 L 113.2 98.0 L 111.7 98.4 L 110.2 98.9 L 108.9 99.4 L 107.6 100.0 L 106.4 100.6 L 105.2 101.2 L 104.2 101.8 L 103.4 102.5 L 102.6 103.2 L 102.0 104.0 Z" stroke="#7c6fff" stroke-width="3.4" stroke-linejoin="round"/>
+  <!-- body: split capsule -->
+  <rect x="95.6" y="75" width="4.4" height="57" rx="4.4" stroke="#ffffff" stroke-width="3.4"/>
+  <rect x="100" y="75" width="4.4" height="57" rx="4.4" stroke="#7c6fff" stroke-width="3.4"/>
+  <!-- antennae -->
+  <path d="M 99.4 76 Q 88 64 81 61" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M 100.6 76 Q 112 64 119 61" stroke="#7c6fff" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="81" cy="61" r="2.2" stroke="#ffffff" stroke-width="3.4"/>
+  <circle cx="119" cy="61" r="2.2" stroke="#7c6fff" stroke-width="3.4"/>
+</svg>
+      </div>
+      <div>
+        <h1 class="site-title">The Butterfly Effect</h1>
+        <p class="site-subtitle">Decision Path Modeling</p>
+      </div>
+    </div>
+
+    <!-- page navigation links -->
+    <nav class="nav-links">
+      <button class="nav-link active" id="nav-home" onclick="goToPage('home')">Home</button>
+      <button class="nav-link" id="nav-about" onclick="goToPage('about')">About You</button>
+      <button class="nav-link" id="nav-app" onclick="goToPage('app')">Prototype</button>
+      <button class="nav-link" id="nav-marketing" onclick="goToPage('marketing')">Why It Works</button>
+      <button class="nav-link" id="nav-guide" onclick="goToPage('guide')">User Guide</button>
+    </nav>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- 3D STAGE: all pages live inside this wrapper -->
+  <!-- The stage gives the pages perspective so the  -->
+  <!-- transitions rotate in real 3D space.          -->
+  <!-- ============================================ -->
+  <div class="stage">
+
+    <!-- ======================================== -->
+    <!-- PAGE 1: HOME                             -->
+    <!-- ======================================== -->
+    <section id="page-home" class="page active">
+
+      <!-- CINEMATIC HERO: full screen, layered depth -->
+      <div class="hero-cinematic">
+        <!-- background image layer (moves slowest = parallax) -->
+        <div class="hero-bg" id="heroBg"></div>
+
+        <!-- layered title: word, butterfly, word - stacked in 3D depth -->
+        <div class="hero-stack" id="heroStack">
+          <p class="hero-kicker reveal">EVERY CHOICE CHANGES EVERYTHING</p>
+          <h2 class="hero-word hero-word-back">BUTTERFLY</h2>
+          <!-- flight wrapper handles the path around the screen;
+               the inner element keeps its own gentle bob -->
+          <div class="butterfly-flight" id="butterflyFlight">
+          <div class="hero-butterfly" id="heroButterfly">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- left wings (black) -->
+  <path d="M 98.0 97.0 L 98.2 95.8 L 98.2 94.6 L 98.1 93.2 L 97.8 91.8 L 97.3 90.3 L 96.8 88.7 L 96.2 87.1 L 95.4 85.4 L 94.6 83.7 L 93.7 81.9 L 92.7 80.2 L 91.7 78.4 L 90.6 76.7 L 89.4 74.9 L 88.2 73.3 L 87.0 71.6 L 85.6 70.1 L 84.3 68.7 L 82.9 67.4 L 81.5 66.2 L 80.0 65.1 L 78.5 64.2 L 77.0 63.5 L 75.5 63.0 L 73.9 62.7 L 72.4 62.6 L 70.8 62.7 L 69.3 63.0 L 67.7 63.5 L 66.2 64.3 L 64.7 65.2 L 63.2 66.3 L 61.8 67.7 L 60.4 69.2 L 59.1 70.8 L 57.9 72.6 L 56.7 74.6 L 55.7 76.6 L 54.7 78.7 L 53.8 80.9 L 53.1 83.2 L 52.5 85.4 L 52.0 87.7 L 51.6 89.9 L 51.4 92.1 L 51.3 94.2 L 51.4 96.2 L 51.7 98.1 L 52.1 99.9 L 52.6 101.6 L 53.3 103.2 L 54.1 104.6 L 55.1 105.8 L 56.3 106.9 L 57.5 107.8 L 58.9 108.5 L 60.4 109.1 L 62.0 109.6 L 63.7 109.9 L 65.5 110.0 L 67.4 110.0 L 69.3 109.9 L 71.3 109.7 L 73.2 109.3 L 75.3 108.9 L 77.3 108.4 L 79.3 107.8 L 81.2 107.2 L 83.2 106.5 L 85.0 105.8 L 86.8 105.0 L 88.6 104.2 L 90.2 103.4 L 91.8 102.6 L 93.2 101.7 L 94.5 100.9 L 95.6 100.0 L 96.6 99.0 L 97.4 98.0 L 98.0 97.0 Z" stroke="#e8e6f5" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M 98.0 104.0 L 97.4 103.2 L 96.6 102.5 L 95.8 101.8 L 94.8 101.2 L 93.6 100.6 L 92.4 100.0 L 91.1 99.4 L 89.8 98.9 L 88.3 98.4 L 86.8 98.0 L 85.3 97.5 L 83.7 97.2 L 82.1 96.8 L 80.5 96.5 L 78.9 96.3 L 77.3 96.1 L 75.7 96.0 L 74.2 96.0 L 72.7 96.0 L 71.2 96.2 L 69.9 96.5 L 68.6 96.9 L 67.4 97.4 L 66.4 98.0 L 65.4 98.7 L 64.5 99.6 L 63.8 100.5 L 63.2 101.6 L 62.8 102.8 L 62.4 104.1 L 62.3 105.6 L 62.2 107.1 L 62.3 108.7 L 62.5 110.3 L 62.8 112.0 L 63.3 113.8 L 63.9 115.6 L 64.5 117.4 L 65.3 119.1 L 66.2 120.9 L 67.2 122.6 L 68.2 124.3 L 69.3 125.8 L 70.5 127.3 L 71.7 128.7 L 72.9 129.9 L 74.2 131.0 L 75.4 132.0 L 76.7 132.8 L 78.0 133.4 L 79.3 133.9 L 80.5 134.2 L 81.8 134.3 L 83.0 134.2 L 84.2 134.0 L 85.3 133.6 L 86.4 133.1 L 87.5 132.4 L 88.5 131.5 L 89.5 130.5 L 90.4 129.4 L 91.3 128.2 L 92.2 127.0 L 93.0 125.6 L 93.7 124.2 L 94.4 122.7 L 95.1 121.2 L 95.7 119.7 L 96.2 118.1 L 96.8 116.6 L 97.2 115.1 L 97.6 113.7 L 97.9 112.2 L 98.2 110.9 L 98.4 109.5 L 98.5 108.3 L 98.6 107.1 L 98.5 106.0 L 98.3 104.9 L 98.0 104.0 Z" stroke="#e8e6f5" stroke-width="3.4" stroke-linejoin="round"/>
+  <!-- right wings (purple) -->
+  <path d="M 102.0 97.0 L 102.6 98.0 L 103.4 99.0 L 104.4 100.0 L 105.5 100.9 L 106.8 101.7 L 108.2 102.6 L 109.8 103.4 L 111.4 104.2 L 113.2 105.0 L 115.0 105.8 L 116.8 106.5 L 118.8 107.2 L 120.7 107.8 L 122.7 108.4 L 124.7 108.9 L 126.8 109.3 L 128.7 109.7 L 130.7 109.9 L 132.6 110.0 L 134.5 110.0 L 136.3 109.9 L 138.0 109.6 L 139.6 109.1 L 141.1 108.5 L 142.5 107.8 L 143.7 106.9 L 144.9 105.8 L 145.9 104.6 L 146.7 103.2 L 147.4 101.6 L 147.9 99.9 L 148.3 98.1 L 148.6 96.2 L 148.7 94.2 L 148.6 92.1 L 148.4 89.9 L 148.0 87.7 L 147.5 85.4 L 146.9 83.2 L 146.2 80.9 L 145.3 78.7 L 144.3 76.6 L 143.3 74.6 L 142.1 72.6 L 140.9 70.8 L 139.6 69.2 L 138.2 67.7 L 136.8 66.3 L 135.3 65.2 L 133.8 64.3 L 132.3 63.5 L 130.7 63.0 L 129.2 62.7 L 127.6 62.6 L 126.1 62.7 L 124.5 63.0 L 123.0 63.5 L 121.5 64.2 L 120.0 65.1 L 118.5 66.2 L 117.1 67.4 L 115.7 68.7 L 114.4 70.1 L 113.0 71.6 L 111.8 73.3 L 110.6 74.9 L 109.4 76.7 L 108.3 78.4 L 107.3 80.2 L 106.3 81.9 L 105.4 83.7 L 104.6 85.4 L 103.8 87.1 L 103.2 88.7 L 102.7 90.3 L 102.2 91.8 L 101.9 93.2 L 101.8 94.6 L 101.8 95.8 L 102.0 97.0 Z" stroke="#7c6fff" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M 102.0 104.0 L 101.7 104.9 L 101.5 106.0 L 101.4 107.1 L 101.5 108.3 L 101.6 109.5 L 101.8 110.9 L 102.1 112.2 L 102.4 113.7 L 102.8 115.1 L 103.2 116.6 L 103.8 118.1 L 104.3 119.7 L 104.9 121.2 L 105.6 122.7 L 106.3 124.2 L 107.0 125.6 L 107.8 127.0 L 108.7 128.2 L 109.6 129.4 L 110.5 130.5 L 111.5 131.5 L 112.5 132.4 L 113.6 133.1 L 114.7 133.6 L 115.8 134.0 L 117.0 134.2 L 118.2 134.3 L 119.5 134.2 L 120.7 133.9 L 122.0 133.4 L 123.3 132.8 L 124.6 132.0 L 125.8 131.0 L 127.1 129.9 L 128.3 128.7 L 129.5 127.3 L 130.7 125.8 L 131.8 124.3 L 132.8 122.6 L 133.8 120.9 L 134.7 119.1 L 135.5 117.4 L 136.1 115.6 L 136.7 113.8 L 137.2 112.0 L 137.5 110.3 L 137.7 108.7 L 137.8 107.1 L 137.7 105.6 L 137.6 104.1 L 137.2 102.8 L 136.8 101.6 L 136.2 100.5 L 135.5 99.6 L 134.6 98.7 L 133.6 98.0 L 132.6 97.4 L 131.4 96.9 L 130.1 96.5 L 128.8 96.2 L 127.3 96.0 L 125.8 96.0 L 124.3 96.0 L 122.7 96.1 L 121.1 96.3 L 119.5 96.5 L 117.9 96.8 L 116.3 97.2 L 114.7 97.5 L 113.2 98.0 L 111.7 98.4 L 110.2 98.9 L 108.9 99.4 L 107.6 100.0 L 106.4 100.6 L 105.2 101.2 L 104.2 101.8 L 103.4 102.5 L 102.6 103.2 L 102.0 104.0 Z" stroke="#7c6fff" stroke-width="3.4" stroke-linejoin="round"/>
+  <!-- body: split capsule -->
+  <rect x="95.6" y="75" width="4.4" height="57" rx="4.4" stroke="#e8e6f5" stroke-width="3.4"/>
+  <rect x="100" y="75" width="4.4" height="57" rx="4.4" stroke="#7c6fff" stroke-width="3.4"/>
+  <!-- antennae -->
+  <path d="M 99.4 76 Q 88 64 81 61" stroke="#e8e6f5" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M 100.6 76 Q 112 64 119 61" stroke="#7c6fff" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="81" cy="61" r="2.2" stroke="#e8e6f5" stroke-width="3.4"/>
+  <circle cx="119" cy="61" r="2.2" stroke="#7c6fff" stroke-width="3.4"/>
+</svg>
+          </div>
+          </div>
+          <h2 class="hero-word hero-word-front">EFFECT</h2>
+          <p class="hero-tagline">One decision. Three honest futures. See the realistic best case,
+          most likely case, and worst case of any big life decision, before you make it.</p>
+          <div class="hero-buttons">
+            <button class="primary-button glow" onclick="goToPage('app')">Try the prototype</button>
+            <button class="ghost-button" onclick="goToPage('about')">Start with you</button>
+          </div>
+        </div>
+
+        <!-- floating glass stat chips (anchored to the hero itself so they never clip) -->
+        <div class="glass-chips">
+          <div class="glass-chip chip-1"><span class="chip-num">216</span><span class="chip-label">outcome narratives</span></div>
+          <div class="glass-chip chip-2"><span class="chip-num">8</span><span class="chip-label">life domains</span></div>
+          <div class="glass-chip chip-3"><span class="chip-num">3</span><span class="chip-label">honest paths</span></div>
+          <div class="glass-chip chip-4"><span class="chip-num">0</span><span class="chip-label">advice given</span></div>
+        </div>
+
+        <!-- scroll cue -->
+        <div class="scroll-cue">
+          <span></span>
+        </div>
+      </div>
+
+      <!-- infinite marquee ticker -->
+      <div class="marquee">
+        <div class="marquee-track">
+          <span>BEST CASE</span><i>&#10022;</i><span>MOST LIKELY</span><i>&#10022;</i><span>WORST CASE</span><i>&#10022;</i><span>YOUR DECISION</span><i>&#10022;</i><span>BEST CASE</span><i>&#10022;</i><span>MOST LIKELY</span><i>&#10022;</i><span>WORST CASE</span><i>&#10022;</i><span>YOUR DECISION</span><i>&#10022;</i>
+        </div>
+      </div>
+
+      <!-- preview band over soft mist background -->
+      <div class="home-preview-band">
+        <p class="band-label">WHAT YOUR PATHS LOOK LIKE</p>
+        <div class="home-preview">
+          <div class="preview-card tilt-left">
+            <span class="path-label best">Best case</span>
+            <p>You land a new role within two or three months at the same or better pay...</p>
+          </div>
+          <div class="preview-card tilt-none">
+            <span class="path-label likely">Most likely</span>
+            <p>You spend a few months searching. Money gets tight, but you find your feet...</p>
+          </div>
+          <div class="preview-card tilt-right">
+            <span class="path-label worst">Worst case</span>
+            <p>The search stretches past six months and your savings take a real hit...</p>
+          </div>
+        </div>
+        <div class="band-cta">
+          <button class="secondary-button" onclick="goToPage('marketing')">Why it works this way</button>
+        </div>
+      </div>
+
+      <!-- SHOWCASE: the application staged like a product gallery -->
+      <div class="showcase">
+        <p class="section-number">01 &mdash; THE APPLICATION</p>
+        <h3 class="showcase-title">Built like a place,<br/><em>not a form.</em></h3>
+
+        <div class="mock-stage">
+          <div class="mock-window mock-a">
+            <div class="mock-bar"><span></span><span></span><span></span></div>
+            <div class="mock-body">
+              <p class="mock-period">&mdash; OVER THE NEXT FEW MONTHS &mdash;</p>
+              <div class="mock-path best"><b>&#8593; BEST CASE</b><p>You land a new role within two or three months, interviewing from a place of choice instead of desperation.</p></div>
+              <div class="mock-path likely"><b>&#8594; MOST LIKELY</b><p>You spend a few months searching. Money gets tight, but you find your feet.</p></div>
+            </div>
+          </div>
+          <div class="mock-window mock-b">
+            <div class="mock-bar"><span></span><span></span><span></span></div>
+            <div class="mock-body mock-dark">
+              <div class="mock-fly">
+                <svg viewBox="30 45 140 130" fill="none" width="72">
+                  <ellipse cx="76" cy="88" rx="26" ry="19" stroke="#e8e6f5" stroke-width="4" transform="rotate(-20 76 88)"/>
+                  <ellipse cx="78" cy="122" rx="20" ry="15" stroke="#e8e6f5" stroke-width="4" transform="rotate(15 78 122)"/>
+                  <ellipse cx="124" cy="88" rx="26" ry="19" stroke="#7c6fff" stroke-width="4" transform="rotate(20 124 88)"/>
+                  <ellipse cx="122" cy="122" rx="20" ry="15" stroke="#7c6fff" stroke-width="4" transform="rotate(-15 122 122)"/>
+                  <rect x="97" y="72" width="6" height="60" rx="3" fill="#e8e6f5"/>
+                </svg>
+              </div>
+              <p class="mock-splash-text">MAPPING YOUR PATHS</p>
+            </div>
+          </div>
+          <div class="mock-window mock-c">
+            <div class="mock-bar"><span></span><span></span><span></span></div>
+            <div class="mock-body">
+              <p class="mock-period">WHAT ELSE THIS AFFECTS</p>
+              <div class="mock-ripple"><b>MONEY</b> Your income stops the day you leave.</div>
+              <div class="mock-ripple"><b>NETWORK</b> Connections fade faster than you expect.</div>
+              <div class="mock-ripple"><b>ROUTINE</b> Freedom becomes its own stress.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REAL LIFE: who actually uses this -->
+      <div class="scenarios">
+        <p class="section-number light">02 &mdash; REAL DECISIONS</p>
+        <h3 class="scenarios-title">Made for moments like these.</h3>
+        <div class="scenario-grid">
+          <div class="scenario-card">
+            <p class="scenario-tag">THE SOLDIER</p>
+            <p class="scenario-text">"Reenlist, ETS, or Guard? Three contracts, three lives. I ran all three before I signed anything."</p>
+          </div>
+          <div class="scenario-card">
+            <p class="scenario-tag">THE STUDENT</p>
+            <p class="scenario-text">"Drop out and take the job offer, or finish the degree? Seeing the ten-year worst case changed my answer."</p>
+          </div>
+          <div class="scenario-card">
+            <p class="scenario-tag">THE PARENT</p>
+            <p class="scenario-text">"Moving states for a raise sounds simple until you map what it does to the kids, the house, the family nearby."</p>
+          </div>
+          <div class="scenario-card">
+            <p class="scenario-tag">THE SWITCHER</p>
+            <p class="scenario-text">"Fifteen years in one career. I needed to see the honest cost of starting over before I could commit to it."</p>
+          </div>
+        </div>
+        <div class="band-cta">
+          <button class="primary-button glow" onclick="goToPage('app')">Run your decision</button>
+        </div>
+      </div>
+
+      <!-- WHY TODAY: ties the prototype to a real societal need -->
+      <div class="society-strip">
+        <p class="section-number light">03 &mdash; WHY TODAY</p>
+        <h3 class="scenarios-title">An application today's world actually needs.</h3>
+        <div class="scenario-grid">
+          <div class="scenario-card">
+            <p class="scenario-tag">SOLVES A PROBLEM</p>
+            <p class="scenario-text">People facing major decisions today are flooded with generic advice, biased opinions, and information overload. This application solves that by showing honest, structured outcomes with no agenda attached.</p>
+          </div>
+          <div class="scenario-card">
+            <p class="scenario-tag">IMPROVES A PROCESS</p>
+            <p class="scenario-text">Decision-making is usually scattered: asking friends, searching online, second-guessing. This tool improves that process by organizing any decision into three clear paths across three time horizons, in under a minute.</p>
+          </div>
+          <div class="scenario-card">
+            <p class="scenario-tag">OFFERS EFFICIENCY</p>
+            <p class="scenario-text">No account, no installation, no internet required after loading. What once took hours of research and conversations becomes a single, instant, private session in the browser.</p>
+          </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- ======================================== -->
+    <!-- PAGE 2: ABOUT YOU                        -->
+    <!-- ======================================== -->
+    <section id="page-about" class="page">
+      <div class="page-inner">
+
+        <!-- THE CREATOR -->
+        <p class="section-number">THE PERSON BEHIND IT</p>
+        <div class="creator-card">
+          <div class="creator-photo" id="creatorPhoto">
+            <img src="matthew-photo.jpg" alt="Matthew Whittingham" />
+          </div>
+          <div class="creator-text">
+            <h2 class="creator-name">Matthew Whittingham</h2>
+            <div class="creator-tags">
+              <span class="creator-tag">U.S. Army Soldier</span>
+              <span class="creator-tag">Computer Science Student</span>
+              <span class="creator-tag">Creator</span>
+            </div>
+            <p class="creator-bio">
+              I'm Matthew Whittingham, a U.S. Army Soldier and a student pursuing a career in
+              computer science. I built The Butterfly Effect with one goal: to help people make
+              informed decisions when the path forward isn't clear.
+            </p>
+            <p class="creator-bio">
+              In the Army, hard decisions are part of the job. In conflict, in leadership, in the
+              day to day, you learn to weigh outcomes fast, and you learn to lean on your team and
+              your leaders when the call is bigger than you. But difficult decisions aren't unique
+              to the military. Spending your savings on something big. Deciding whether to chase a
+              dream or finish a degree. Everyone hits moments where every option carries real weight.
+            </p>
+            <p class="creator-bio">
+              This application was made for anyone standing at one of those crossroads: a way to
+              see your paths honestly, best case to worst case, and make the strongest decision
+              for yourself and your family.
+            </p>
+          </div>
+        </div>
+
+        <h2 class="page-title" style="margin-top: 46px;">About You</h2>
+        <p class="page-lead">
+          This tool is not about us. It is about you. The more it knows about your situation,
+          the more your paths will actually fit your life. Fill in what you are comfortable
+          sharing, and the prototype will use it automatically. Nothing here is saved or sent
+          anywhere; it lives only on this page while it is open.
+        </p>
+
+        <div class="card">
+          <div class="about-grid">
+            <div>
+              <label class="small-label" for="profileAge">Your age</label>
+              <input type="number" id="profileAge" class="text-input" placeholder="For example: 27" min="16" max="75" oninput="updateProfileStatus()" />
+            </div>
+            <div>
+              <label class="small-label" for="profileSituation">Your situation</label>
+              <input type="text" id="profileSituation" class="text-input" placeholder="For example: married, two kids, renting" oninput="updateProfileStatus()" />
+            </div>
+          </div>
+
+          <label class="small-label" style="margin-top: 16px;">What matters most to you right now?</label>
+          <div id="priorityButtons" class="category-buttons">
+            <button class="category-button" data-priority="stability" onclick="setPriority('stability')">Stability</button>
+            <button class="category-button" data-priority="growth" onclick="setPriority('growth')">Growth</button>
+            <button class="category-button" data-priority="family" onclick="setPriority('family')">Family</button>
+            <button class="category-button" data-priority="freedom" onclick="setPriority('freedom')">Freedom</button>
+          </div>
+
+          <div class="about-confirm">
+            <p id="profileStatus" class="profile-status">Your profile is empty. The prototype will still work, just less personal.</p>
+            <button class="primary-button" onclick="saveProfileAndGo()">Save and open the prototype</button>
+          </div>
+        </div>
+
+        <div class="about-note card">
+          <h3 class="card-heading">Why we ask</h3>
+          <p class="body-text">
+            A 22 year old with no dependents and a 45 year old with two kids can type the exact
+            same decision and face very different realities. Your age changes your recovery
+            window. Your family situation changes the weight of the worst case. Your priorities
+            change which path deserves your attention. That is why the paths speak to you, not
+            to an average person.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================== -->
+    <!-- PAGE 3: THE PROTOTYPE (the actual app)   -->
+    <!-- ======================================== -->
+    <section id="page-app" class="page">
+      <div class="page-inner">
+
+        <p class="section-number">APPLICATION PROTOTYPE &mdash; INFORMATIONAL PAGE</p>
+        <h2 class="page-title">The Prototype</h2>
+        <p class="page-lead">Type your decision below and see three honest paths across three time horizons. Full details about how this prototype works are provided beneath the application.</p>
+
+        <!-- Input card -->
+        <div class="card input-card">
+          <label class="field-label" for="decisionInput">What's your decision?</label>
+          <textarea
+            id="decisionInput"
+            class="decision-input"
+            rows="3"
+            maxlength="200"
+            placeholder="For example: Quit my job to go back to school"
+            oninput="updateCharCount()"
+            onkeydown="handleKeyPress(event)"></textarea>
+
+          <div class="input-meta">
+            <p id="validationMessage" class="validation-message"></p>
+            <p id="charCount" class="char-count">0 / 200</p>
+          </div>
+
+          <p class="small-label">Examples (click to use):</p>
+          <div id="exampleButtons" class="example-buttons"></div>
+
+          <p class="small-label">Category:</p>
+          <div id="categoryButtons" class="category-buttons"></div>
+
+          <button id="situationToggle" class="situation-toggle" onclick="toggleSituation()">+ Add your situation (optional)</button>
+
+          <div id="situationFields" class="situation-fields" style="display: none;">
+            <div class="situation-field">
+              <label class="small-label" for="ageInput">Your age</label>
+              <input type="number" id="ageInput" class="text-input" placeholder="For example: 27" min="16" max="75" />
+            </div>
+            <div class="situation-field">
+              <label class="small-label" for="contextInput">Your situation</label>
+              <input type="text" id="contextInput" class="text-input" placeholder="For example: married, two kids, no savings" />
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button id="analyzeButton" class="primary-button" onclick="analyzeDecision()">Show me my paths</button>
+            <button id="rerunButton" class="secondary-button" onclick="analyzeDecision()" style="display: none;">Re-run</button>
+            <button id="copyButton" class="secondary-button" onclick="copyResults()" style="display: none;">Copy</button>
+            <span class="action-note">No advice given. Your paths only.</span>
+          </div>
+        </div>
+
+        <!-- Results area -->
+        <div id="resultsArea" class="results-area" style="display: none;">
+
+          <div class="card summary-card">
+            <p class="summary-label">YOUR DECISION <span id="domainBadge" class="domain-badge"></span></p>
+            <p id="summaryText" class="summary-text"></p>
+          </div>
+
+          <div class="legend">
+            <span class="legend-item"><span class="legend-icon best">&#8593;</span> Best case</span>
+            <span class="legend-item"><span class="legend-icon likely">&#8594;</span> Most likely</span>
+            <span class="legend-item"><span class="legend-icon worst">&#8595;</span> Worst case</span>
+          </div>
+
+          <div class="view-toggle">
+            <button id="timelineViewButton" class="view-button active" onclick="setView('timeline')">Timeline</button>
+            <button id="snapshotViewButton" class="view-button" onclick="setView('snapshot')">Snapshot</button>
+          </div>
+
+          <div id="timelineView" class="timeline-view"></div>
+
+          <div id="snapshotView" class="snapshot-view" style="display: none;">
+            <div class="snapshot-buttons">
+              <button id="snapBestButton" class="snap-button" onclick="setSnapshotType('best')">Best case</button>
+              <button id="snapLikelyButton" class="snap-button active" onclick="setSnapshotType('likely')">Most likely</button>
+              <button id="snapWorstButton" class="snap-button" onclick="setSnapshotType('worst')">Worst case</button>
+            </div>
+            <div id="snapshotGrid" class="snapshot-grid"></div>
+          </div>
+
+          <div class="card ripple-card">
+            <h2 class="ripple-title">What else this affects</h2>
+            <div id="rippleList" class="ripple-list"></div>
+          </div>
+
+          <div class="disclaimer">
+            <p>These paths are realistic estimates, not guarantees, and not personal advice. No two situations are the same. Use this as a thinking tool.</p>
+          </div>
+
+        </div>
+
+        <!-- Empty state -->
+        <div id="emptyState" class="empty-state">
+          <p class="empty-title">Describe your decision above</p>
+          <p class="empty-text">You will get three realistic paths for every stage of the timeline.</p>
+        </div>
+
+        <!-- INFORMATIONAL: about this prototype -->
+        <div class="card guide-card" style="margin-top: 40px;">
+          <h3 class="card-heading">What this prototype is</h3>
+          <p class="body-text">The Butterfly Effect is a fully functional decision path modeling application. The user describes a real decision in plain language, optionally adds personal context, and receives a best case, most likely case, and worst case projection for the near term, the mid term, and the long term, plus the secondary areas of life the decision tends to affect.</p>
+        </div>
+        <div class="card guide-card">
+          <h3 class="card-heading">How outcomes are generated</h3>
+          <p class="body-text">The prototype works in three steps. First, a keyword classifier reads the decision text and identifies which of eight life domains it belongs to (career, military, business, education, finance, health, relationships, or location). Second, it retrieves outcome narratives for that domain from a built-in library of 216 hand-written variants, selecting different versions on every run. Third, it personalizes the most likely path using any age or situation details the user provides. No artificial intelligence service or external data source is involved at runtime.</p>
+        </div>
+        <div class="card guide-card">
+          <h3 class="card-heading">How it is built</h3>
+          <p class="body-text">The application is written in HTML, CSS, and JavaScript with no frameworks and no external dependencies. It runs entirely in the browser, requires no installation or account, works offline once loaded, and stores nothing the user types. It was designed and built as the final capstone prototype for ITCC298.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================== -->
+    <!-- PAGE 4: MARKETING (Why It Works)         -->
+    <!-- ======================================== -->
+    <section id="page-marketing" class="page">
+      <div class="page-inner">
+        <p class="section-number">MARKETING PAGE</p>
+        <h2 class="page-title">Why It Works</h2>
+        <p class="page-lead">
+          Most decision tools tell you what to do. We think that is exactly backwards.
+        </p>
+
+        <!-- big stat-style claims -->
+        <div class="marketing-stats">
+          <div class="stat-card">
+            <p class="stat-number">3</p>
+            <p class="stat-text">honest paths for every decision, not one sugarcoated answer</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number">0</p>
+            <p class="stat-text">pieces of advice given. The decision stays completely yours</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number">100%</p>
+            <p class="stat-text">private. Nothing you type is stored or sent anywhere</p>
+          </div>
+        </div>
+
+        <!-- feature rows -->
+        <div class="card feature-row">
+          <div class="feature-text">
+            <h3 class="card-heading">Honest by design</h3>
+            <p class="body-text">
+              Every decision shows you a worst case, on purpose. Tools that only show upside
+              feel good and help nobody. Seeing the hard path clearly is what lets you prepare
+              for it, or walk toward it anyway with open eyes.
+            </p>
+          </div>
+          <div class="feature-visual worst-glow">&#8595;</div>
+        </div>
+
+        <div class="card feature-row reverse">
+          <div class="feature-text">
+            <h3 class="card-heading">Built around your timeline</h3>
+            <p class="body-text">
+              A decision does not happen in a moment. It unfolds over months and years. Your
+              paths are mapped across three time periods so you can see the near future, the
+              adjustment period, and the long game, side by side.
+            </p>
+          </div>
+          <div class="feature-visual likely-glow">&#8594;</div>
+        </div>
+
+        <div class="card feature-row">
+          <div class="feature-text">
+            <h3 class="card-heading">Nothing to install, nothing to sign up for</h3>
+            <p class="body-text">
+              The whole application is two small files that run in your browser, even offline.
+              No account. No subscription. No data collection. Open it, think clearly, close it.
+            </p>
+          </div>
+          <div class="feature-visual best-glow">&#8593;</div>
+        </div>
+
+        <!-- SOCIAL PROOF: what early users say -->
+        <p class="section-number" style="margin-top: 40px;">WHAT EARLY TESTERS SAY</p>
+        <div class="testimonial-grid">
+          <div class="card testimonial-card">
+            <p class="testimonial-text">"I typed in the decision I'd been avoiding for months. Seeing the worst case written out plainly made it less scary, not more."</p>
+            <p class="testimonial-name">Early tester &mdash; career change</p>
+          </div>
+          <div class="card testimonial-card">
+            <p class="testimonial-text">"No login, no upsell popups, nothing tracking me. I ran four different decisions in ten minutes."</p>
+            <p class="testimonial-name">Early tester &mdash; relocation</p>
+          </div>
+          <div class="card testimonial-card">
+            <p class="testimonial-text">"It never told me what to do, and that's exactly why I trusted it. The decision stayed mine."</p>
+            <p class="testimonial-name">Early tester &mdash; education</p>
+          </div>
+        </div>
+
+        <!-- PRICING -->
+        <p class="section-number" style="margin-top: 44px;">SIMPLE PRICING</p>
+        <div class="pricing-grid">
+          <div class="card price-card">
+            <p class="price-tier">FREE</p>
+            <p class="price-amount">$0</p>
+            <p class="price-note">everything you need to decide</p>
+            <ul class="price-list">
+              <li>Unlimited decisions</li>
+              <li>All three paths, all three time horizons</li>
+              <li>All eight life domains</li>
+              <li>Works offline, nothing stored</li>
+            </ul>
+            <button class="secondary-button" onclick="goToPage('app')">Start free</button>
+          </div>
+          <div class="card price-card featured">
+            <p class="price-tier">PREMIUM &mdash; PLANNED</p>
+            <p class="price-amount">$2.99</p>
+            <p class="price-note">one-time upgrade, coming soon</p>
+            <ul class="price-list">
+              <li>Expanded path library and niche decision types</li>
+              <li>Side-by-side comparison of two decisions</li>
+              <li>Printable decision report (PDF)</li>
+              <li>Supports continued development</li>
+            </ul>
+            <button class="primary-button" onclick="goToPage('app')">Try free first</button>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <p class="section-number" style="margin-top: 44px;">FREQUENTLY ASKED QUESTIONS</p>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Is this actually free?</summary>
+            <p>Yes. The full working prototype is free, with no account and no ads. The premium tier is a planned future upgrade, not a gate on anything you see today.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Does it give me advice?</summary>
+            <p>No, by design. It shows you a realistic best case, most likely case, and worst case so you can decide with clear eyes. The decision is always yours.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Is my information private?</summary>
+            <p>Completely. Nothing you type is saved, sent, or stored anywhere. Everything disappears the moment you close the page.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Where do the outcomes come from?</summary>
+            <p>A built-in library of 216 hand-written outcome narratives, organized by decision type and time horizon, personalized with any details you choose to share. No AI service runs behind it.</p>
+          </details>
+        </div>
+
+        <!-- call to action -->
+        <div class="marketing-cta">
+          <h3 class="cta-title">Your next big decision deserves a clearer picture.</h3>
+          <button class="primary-button" onclick="goToPage('app')">Open the prototype</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================== -->
+    <!-- PAGE 5: USER GUIDE                       -->
+    <!-- ======================================== -->
+    <section id="page-guide" class="page">
+      <div class="page-inner">
+        <h2 class="page-title">User Guide</h2>
+        <p class="page-lead">
+          Everything you need to know, in plain language. No experience required.
+        </p>
+
+        <div class="card guide-card">
+          <h3 class="card-heading">1. Getting started</h3>
+          <p class="body-text">
+            There is nothing to install and no account to create. The application runs right
+            here in your browser and works even without an internet connection once the page
+            is open. Head to the <button class="inline-link" onclick="goToPage('app')">Prototype</button>
+            page whenever you are ready.
+          </p>
+        </div>
+
+        <div class="card guide-card">
+          <h3 class="card-heading">2. Describe your decision</h3>
+          <p class="body-text">
+            Type the decision you are considering into the large box, the same way you would
+            say it to a friend. For example: "Quit my job to go back to school." If you are not
+            sure what to write, click one of the example buttons and the box fills itself in.
+          </p>
+        </div>
+
+        <div class="card guide-card">
+          <h3 class="card-heading">3. Make it yours (optional)</h3>
+          <p class="body-text">
+            Visit the <button class="inline-link" onclick="goToPage('about')">About You</button> page
+            to save your age, situation, and priorities. The prototype uses them automatically.
+            Or click "Add your situation" inside the prototype to enter them there. Either way,
+            nothing is stored after you close the page.
+          </p>
+        </div>
+
+        <div class="card guide-card">
+          <h3 class="card-heading">4. Read your three paths</h3>
+          <p class="body-text">
+            Click "Show me my paths." For each time period you get a best case (green, up arrow),
+            a most likely case (gold, right arrow), and a worst case (red, down arrow). Below
+            them, "What else this affects" points out other parts of your life the decision
+            touches, like money, family, or health.
+          </p>
+        </div>
+
+        <div class="card guide-card">
+          <h3 class="card-heading">5. Explore the views</h3>
+          <p class="body-text">
+            Timeline shows your outcomes in order over time. Snapshot compares all time periods
+            side by side for one path type at a time. Use the Copy button to save your results,
+            or Re-run to see the same paths with fresh wording. You cannot break anything by
+            clicking around.
+          </p>
+        </div>
+
+        <div class="card guide-card safety-card">
+          <h3 class="card-heading">A few important reminders</h3>
+          <p class="body-text">
+            The paths are realistic estimates based on how similar decisions tend to unfold.
+            They are not predictions and not advice. For decisions involving serious money,
+            legal, medical, or emotional matters, use this as a starting point and then talk
+            with a qualified professional. The final call is always yours.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end of .stage -->
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+
+  <!-- ============================================ -->
+  <!-- PATH SPLASH: butterfly moment shown the       -->
+  <!-- instant the user asks for their paths         -->
+  <!-- ============================================ -->
+  <div id="pathSplash" class="path-splash">
+    <div class="splash-butterfly">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="wing wing-left"><path d="M 98.0 97.0 L 98.2 95.8 L 98.2 94.6 L 98.1 93.2 L 97.8 91.8 L 97.3 90.3 L 96.8 88.7 L 96.2 87.1 L 95.4 85.4 L 94.6 83.7 L 93.7 81.9 L 92.7 80.2 L 91.7 78.4 L 90.6 76.7 L 89.4 74.9 L 88.2 73.3 L 87.0 71.6 L 85.6 70.1 L 84.3 68.7 L 82.9 67.4 L 81.5 66.2 L 80.0 65.1 L 78.5 64.2 L 77.0 63.5 L 75.5 63.0 L 73.9 62.7 L 72.4 62.6 L 70.8 62.7 L 69.3 63.0 L 67.7 63.5 L 66.2 64.3 L 64.7 65.2 L 63.2 66.3 L 61.8 67.7 L 60.4 69.2 L 59.1 70.8 L 57.9 72.6 L 56.7 74.6 L 55.7 76.6 L 54.7 78.7 L 53.8 80.9 L 53.1 83.2 L 52.5 85.4 L 52.0 87.7 L 51.6 89.9 L 51.4 92.1 L 51.3 94.2 L 51.4 96.2 L 51.7 98.1 L 52.1 99.9 L 52.6 101.6 L 53.3 103.2 L 54.1 104.6 L 55.1 105.8 L 56.3 106.9 L 57.5 107.8 L 58.9 108.5 L 60.4 109.1 L 62.0 109.6 L 63.7 109.9 L 65.5 110.0 L 67.4 110.0 L 69.3 109.9 L 71.3 109.7 L 73.2 109.3 L 75.3 108.9 L 77.3 108.4 L 79.3 107.8 L 81.2 107.2 L 83.2 106.5 L 85.0 105.8 L 86.8 105.0 L 88.6 104.2 L 90.2 103.4 L 91.8 102.6 L 93.2 101.7 L 94.5 100.9 L 95.6 100.0 L 96.6 99.0 L 97.4 98.0 L 98.0 97.0 Z" stroke="#e8e6f5" stroke-width="3.4" stroke-linejoin="round"/><path d="M 98.0 104.0 L 97.4 103.2 L 96.6 102.5 L 95.8 101.8 L 94.8 101.2 L 93.6 100.6 L 92.4 100.0 L 91.1 99.4 L 89.8 98.9 L 88.3 98.4 L 86.8 98.0 L 85.3 97.5 L 83.7 97.2 L 82.1 96.8 L 80.5 96.5 L 78.9 96.3 L 77.3 96.1 L 75.7 96.0 L 74.2 96.0 L 72.7 96.0 L 71.2 96.2 L 69.9 96.5 L 68.6 96.9 L 67.4 97.4 L 66.4 98.0 L 65.4 98.7 L 64.5 99.6 L 63.8 100.5 L 63.2 101.6 L 62.8 102.8 L 62.4 104.1 L 62.3 105.6 L 62.2 107.1 L 62.3 108.7 L 62.5 110.3 L 62.8 112.0 L 63.3 113.8 L 63.9 115.6 L 64.5 117.4 L 65.3 119.1 L 66.2 120.9 L 67.2 122.6 L 68.2 124.3 L 69.3 125.8 L 70.5 127.3 L 71.7 128.7 L 72.9 129.9 L 74.2 131.0 L 75.4 132.0 L 76.7 132.8 L 78.0 133.4 L 79.3 133.9 L 80.5 134.2 L 81.8 134.3 L 83.0 134.2 L 84.2 134.0 L 85.3 133.6 L 86.4 133.1 L 87.5 132.4 L 88.5 131.5 L 89.5 130.5 L 90.4 129.4 L 91.3 128.2 L 92.2 127.0 L 93.0 125.6 L 93.7 124.2 L 94.4 122.7 L 95.1 121.2 L 95.7 119.7 L 96.2 118.1 L 96.8 116.6 L 97.2 115.1 L 97.6 113.7 L 97.9 112.2 L 98.2 110.9 L 98.4 109.5 L 98.5 108.3 L 98.6 107.1 L 98.5 106.0 L 98.3 104.9 L 98.0 104.0 Z" stroke="#e8e6f5" stroke-width="3.4" stroke-linejoin="round"/></g>
+        <g class="wing wing-right"><path d="M 102.0 97.0 L 102.6 98.0 L 103.4 99.0 L 104.4 100.0 L 105.5 100.9 L 106.8 101.7 L 108.2 102.6 L 109.8 103.4 L 111.4 104.2 L 113.2 105.0 L 115.0 105.8 L 116.8 106.5 L 118.8 107.2 L 120.7 107.8 L 122.7 108.4 L 124.7 108.9 L 126.8 109.3 L 128.7 109.7 L 130.7 109.9 L 132.6 110.0 L 134.5 110.0 L 136.3 109.9 L 138.0 109.6 L 139.6 109.1 L 141.1 108.5 L 142.5 107.8 L 143.7 106.9 L 144.9 105.8 L 145.9 104.6 L 146.7 103.2 L 147.4 101.6 L 147.9 99.9 L 148.3 98.1 L 148.6 96.2 L 148.7 94.2 L 148.6 92.1 L 148.4 89.9 L 148.0 87.7 L 147.5 85.4 L 146.9 83.2 L 146.2 80.9 L 145.3 78.7 L 144.3 76.6 L 143.3 74.6 L 142.1 72.6 L 140.9 70.8 L 139.6 69.2 L 138.2 67.7 L 136.8 66.3 L 135.3 65.2 L 133.8 64.3 L 132.3 63.5 L 130.7 63.0 L 129.2 62.7 L 127.6 62.6 L 126.1 62.7 L 124.5 63.0 L 123.0 63.5 L 121.5 64.2 L 120.0 65.1 L 118.5 66.2 L 117.1 67.4 L 115.7 68.7 L 114.4 70.1 L 113.0 71.6 L 111.8 73.3 L 110.6 74.9 L 109.4 76.7 L 108.3 78.4 L 107.3 80.2 L 106.3 81.9 L 105.4 83.7 L 104.6 85.4 L 103.8 87.1 L 103.2 88.7 L 102.7 90.3 L 102.2 91.8 L 101.9 93.2 L 101.8 94.6 L 101.8 95.8 L 102.0 97.0 Z" stroke="#7c6fff" stroke-width="3.4" stroke-linejoin="round"/><path d="M 102.0 104.0 L 101.7 104.9 L 101.5 106.0 L 101.4 107.1 L 101.5 108.3 L 101.6 109.5 L 101.8 110.9 L 102.1 112.2 L 102.4 113.7 L 102.8 115.1 L 103.2 116.6 L 103.8 118.1 L 104.3 119.7 L 104.9 121.2 L 105.6 122.7 L 106.3 124.2 L 107.0 125.6 L 107.8 127.0 L 108.7 128.2 L 109.6 129.4 L 110.5 130.5 L 111.5 131.5 L 112.5 132.4 L 113.6 133.1 L 114.7 133.6 L 115.8 134.0 L 117.0 134.2 L 118.2 134.3 L 119.5 134.2 L 120.7 133.9 L 122.0 133.4 L 123.3 132.8 L 124.6 132.0 L 125.8 131.0 L 127.1 129.9 L 128.3 128.7 L 129.5 127.3 L 130.7 125.8 L 131.8 124.3 L 132.8 122.6 L 133.8 120.9 L 134.7 119.1 L 135.5 117.4 L 136.1 115.6 L 136.7 113.8 L 137.2 112.0 L 137.5 110.3 L 137.7 108.7 L 137.8 107.1 L 137.7 105.6 L 137.6 104.1 L 137.2 102.8 L 136.8 101.6 L 136.2 100.5 L 135.5 99.6 L 134.6 98.7 L 133.6 98.0 L 132.6 97.4 L 131.4 96.9 L 130.1 96.5 L 128.8 96.2 L 127.3 96.0 L 125.8 96.0 L 124.3 96.0 L 122.7 96.1 L 121.1 96.3 L 119.5 96.5 L 117.9 96.8 L 116.3 97.2 L 114.7 97.5 L 113.2 98.0 L 111.7 98.4 L 110.2 98.9 L 108.9 99.4 L 107.6 100.0 L 106.4 100.6 L 105.2 101.2 L 104.2 101.8 L 103.4 102.5 L 102.6 103.2 L 102.0 104.0 Z" stroke="#7c6fff" stroke-width="3.4" stroke-linejoin="round"/></g>
+        
+  <!-- left wings (black) -->
+  
+  
+  <!-- right wings (purple) -->
+  
+  
+  <!-- body: split capsule -->
+  <rect x="95.6" y="75" width="4.4" height="57" rx="4.4" stroke="#e8e6f5" stroke-width="3.4"/>
+  <rect x="100" y="75" width="4.4" height="57" rx="4.4" stroke="#7c6fff" stroke-width="3.4"/>
+  <!-- antennae -->
+  <path d="M 99.4 76 Q 88 64 81 61" stroke="#e8e6f5" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M 100.6 76 Q 112 64 119 61" stroke="#7c6fff" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="81" cy="61" r="2.2" stroke="#e8e6f5" stroke-width="3.4"/>
+  <circle cx="119" cy="61" r="2.2" stroke="#7c6fff" stroke-width="3.4"/>
+
+      </svg>
+    </div>
+    <p class="splash-text">Mapping your paths</p>
+    <div class="splash-rings"><span></span><span></span><span></span></div>
+  </div>
+
+  <footer class="site-footer">
+    <p>The Butterfly Effect &middot; Decision Path Modeling &middot; Runs offline &middot; ITCC298 Capstone</p>
+  </footer>
+
+  <script>
+
+    // ===========================================================
+    // PAGE NAVIGATION with a 3D transition.
+    // The leaving page rotates away in 3D space, then the new
+    // page swings in from the opposite side.
+    // ===========================================================
+    var currentPage = "home";
+    var isTransitioning = false;
+
+    function goToPage(pageName) {
+      // do nothing if we are already there or mid-transition
+      if (pageName === currentPage || isTransitioning) {
+        return;
+      }
+      isTransitioning = true;
+
+      var oldPage = document.getElementById("page-" + currentPage);
+      var newPage = document.getElementById("page-" + pageName);
+
+      // update which nav link is highlighted
+      var navNames = ["home", "about", "app", "marketing", "guide"];
+      for (var i = 0; i < navNames.length; i++) {
+        var link = document.getElementById("nav-" + navNames[i]);
+        if (navNames[i] === pageName) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      }
+
+      // both pages animate AT THE SAME TIME: the old one zooms
+      // away while the new one rises underneath it. No waiting gap.
+      oldPage.classList.add("page-leave");
+      newPage.classList.add("active");
+      newPage.classList.add("page-enter");
+
+      // jump to the top instantly (smooth scrolling here would
+      // animate the scroll during the transition and feel laggy)
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+      setTimeout(function () {
+        oldPage.classList.remove("active");
+        oldPage.classList.remove("page-leave");
+        newPage.classList.remove("page-enter");
+        isTransitioning = false;
+      }, 440);
+
+      currentPage = pageName;
+    }
+
+    // ===========================================================
+    // ABOUT YOU: the visitor's profile.
+    // Saved values are copied into the prototype's own inputs,
+    // so the app personalizes results automatically.
+    // ===========================================================
+    var selectedPriority = "";
+
+    function setPriority(priority) {
+      selectedPriority = priority;
+      var buttons = document.querySelectorAll("#priorityButtons .category-button");
+      for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].getAttribute("data-priority") === priority) {
+          buttons[i].classList.add("active");
+        } else {
+          buttons[i].classList.remove("active");
+        }
+      }
+      updateProfileStatus();
+    }
+
+    function updateProfileStatus() {
+      var age = document.getElementById("profileAge").value;
+      var situation = document.getElementById("profileSituation").value;
+      var status = document.getElementById("profileStatus");
+
+      if (age === "" && situation === "" && selectedPriority === "") {
+        status.textContent = "Your profile is empty. The prototype will still work, just less personal.";
+      } else {
+        status.textContent = "Looking good. The prototype will use this automatically.";
+      }
+    }
+
+    function saveProfileAndGo() {
+      var age = document.getElementById("profileAge").value;
+      var situation = document.getElementById("profileSituation").value;
+
+      // copy the profile into the prototype's input fields
+      document.getElementById("ageInput").value = age;
+
+      var fullSituation = situation;
+      if (selectedPriority !== "") {
+        if (fullSituation !== "") {
+          fullSituation = fullSituation + ", ";
+        }
+        fullSituation = fullSituation + "top priority: " + selectedPriority;
+      }
+      document.getElementById("contextInput").value = fullSituation;
+
+      // open the situation fields in the app so the user can see what carried over
+      if (age !== "" || fullSituation !== "") {
+        var fields = document.getElementById("situationFields");
+        var toggle = document.getElementById("situationToggle");
+        fields.style.display = "flex";
+        toggle.textContent = "- Hide your situation";
+      }
+
+      goToPage("app");
+    }
+
+    // ===========================================================
+    // DATA: keywords used to detect the type of decision
+    // ===========================================================
+    var domainKeywords = {
+      military: ["military", "army", "navy", "marines", "enlist", "deploy", "soldier", "service", "sapper", "ranger", "veteran"],
+      business: ["start a business", "startup", "own business", "company", "entrepreneur", "freelance", "launch"],
+      education: ["college", "university", "degree", "school", "masters", "drop out", "student loan", "go back to school"],
+      finance: ["invest", "stock", "savings", "debt", "pay off", "retire", "buy a house", "save money"],
+      career: ["quit", "resign", "new job", "career", "promotion", "fired", "laid off", "salary"],
+      health: ["quit smoking", "get sober", "lose weight", "exercise", "diet", "therapy", "stop drinking"],
+      relationships: ["get married", "marry", "divorce", "break up", "have a baby", "relationship", "kids"],
+      location: ["move", "relocate", "new city", "new state", "abroad", "move back"]
+    };
+
+    // ===========================================================
+    // DATA: friendly names and colors for each decision type
+    // ===========================================================
+    var domainInfo = {
+      military:      { name: "Military",      color: "#5b8def" },
+      business:      { name: "Business",      color: "#d9a441" },
+      education:     { name: "Education",     color: "#7c6fff" },
+      finance:       { name: "Finance",       color: "#36a37a" },
+      career:        { name: "Career",        color: "#2bb3a3" },
+      health:        { name: "Health",        color: "#2bb3a3" },
+      relationships: { name: "Relationships", color: "#e07aa8" },
+      location:      { name: "Location",      color: "#5b8def" }
+    };
+
+    // ===========================================================
+    // DATA: the outcome paths for each decision type
+    // ===========================================================
+    var pathData = {
+      "career": {
+        "label": "Career / Job Change",
+        "periods": [
+          {
+            "title": "Over the next few months",
+            "best": [
+              "You land a new role within two or three months at the same or better pay. The break gives you a reset, and you interview from a place of choice instead of desperation.",
+              "A contract or freelance gig bridges the gap almost immediately, pays the bills, and unexpectedly turns into the door for your next full-time role.",
+              "Someone in your network pulls you into an opening before you even finish updating your resume. The transition is nearly seamless and the fit is better than what you left."
+            ],
+            "likely": [
+              "You spend a few months searching. Money gets tight and some interviews go nowhere, but you eventually find something and get back on your feet.",
+              "The first weeks feel productive, then the search drags. You widen what you are willing to accept, take more calls, and land something workable by month three or four.",
+              "You underestimate how draining the search is. Rejections sting more than expected, but a steady routine of applications finally converts into a reasonable offer."
+            ],
+            "worst": [
+              "The search stretches past six months. Your savings take a real hit and a gap on your resume starts working against you. You take a job just to have income.",
+              "A hiring slowdown in your field hits right as you start looking. Interviews freeze mid-process, debt creeps up, and you settle for a role well below your target.",
+              "Back-to-back near misses wear you down. You burn through savings, lean on credit, and accept the first stable offer even though it is a clear step backward."
+            ]
+          },
+          {
+            "title": "Within the next year",
+            "best": [
+              "You are in a better role with better pay or a better environment. You look back on the decision as a good one.",
+              "The new position turns into more than a job: a mentor, a skill set, or a promotion track you did not have before. Leaving was the unlock.",
+              "You have leverage again. Recruiters reach out, your confidence is back, and the story of why you left now reads as a smart, deliberate move."
+            ],
+            "likely": [
+              "You are employed and stable again, though maybe not in your ideal job. The financial hit was real but you have recovered.",
+              "You have rebuilt your rhythm. The pay is close to what you had before, the savings are slowly refilling, and the stress of the gap is fading.",
+              "The new job is fine, not perfect. You are already quietly planning the next move, but this time from the safety of a paycheck."
+            ],
+            "worst": [
+              "You are working below your experience level just to cover the bills, and rebuilding your momentum takes longer than expected.",
+              "You took the wrong lifeline. The new job is worse than the one you left, and within the year you are searching again with less cushion than before.",
+              "The gap plus a lower salary reset your baseline. Raises now build from a smaller number, and you feel the compounding cost every month."
+            ]
+          },
+          {
+            "title": "Three to five years from now",
+            "best": [
+              "This move became a turning point, putting you ahead of where you would have been if you had stayed.",
+              "The pivot led to a field or company you would never have found otherwise. Your ceiling is visibly higher than the path you walked away from.",
+              "You tell the story of quitting as the best professional risk you ever took, and the raises, title, and confidence back it up."
+            ],
+            "likely": [
+              "You are roughly where you would have been. The gap cost you a little, but you recovered and moved forward.",
+              "The detour neither made nor broke your career. What mattered more was what you learned about your own risk tolerance and what you actually want.",
+              "Professionally you are on par with peers, though your savings took two or three years to fully recover from the transition."
+            ],
+            "worst": [
+              "The effects of the gap left you behind peers who made their moves more carefully.",
+              "The lost earning years show up everywhere: retirement contributions, home plans, and the seniority you had to rebuild from scratch.",
+              "A pattern formed. The abrupt exit made the next one easier, and a string of short stints now makes employers hesitate."
+            ]
+          }
+        ],
+        "ripples": [
+          {
+            "area": "Money",
+            "text": "Your income stops the day you leave. Without three to six months of savings, the pressure can push you into a rushed decision."
+          },
+          {
+            "area": "Benefits",
+            "text": "You lose employer health insurance when you quit. Replacing it on your own can cost several hundred dollars a month."
+          },
+          {
+            "area": "Routine",
+            "text": "The first couple of weeks feel like freedom, but the lack of structure can become its own kind of stress."
+          },
+          {
+            "area": "Network",
+            "text": "Professional connections fade faster than you expect once you are no longer inside a company. Stay in touch with people."
+          },
+          {
+            "area": "Confidence",
+            "text": "Long searches erode self-belief in ways that show up in interviews. Protecting your confidence is part of the job hunt."
+          },
+          {
+            "area": "Family",
+            "text": "The people who depend on your income feel this decision too. Getting them on board early prevents resentment later."
+          }
+        ]
+      },
+      "military": {
+        "label": "Military Service",
+        "periods": [
+          {
+            "title": "Your first year",
+            "best": [
+              "You adapt quickly. The structure works for you, and your pay, housing, and healthcare are fully covered, leaving you more stable than many people your age.",
+              "Training reveals a strength you did not know you had. You finish near the top of your class and your first duty station gives you real responsibility fast.",
+              "The discipline clicks with something in you. You arrive at your unit fit, focused, and already earning the trust of your leadership."
+            ],
+            "likely": [
+              "Basic training and early service are hard physically and mentally. You are homesick and pushed to your limits, but you get through it and start building skills.",
+              "The first months strip away your old routines completely. It is exhausting and disorienting, but by the end of the year you have found your footing and your people.",
+              "You question the decision more than once, usually at 4 a.m. But the paycheck is steady, the training accumulates, and the doubt slowly gives way to competence."
+            ],
+            "worst": [
+              "The strict structure and pace do not match what you expected, and early service becomes something you are enduring rather than enjoying.",
+              "An injury in training sets you back months and threatens the plan entirely. Recovery, paperwork, and uncertainty define your first year.",
+              "The culture of your first unit is a bad fit. Poor leadership sours the experience early, and you spend the year counting weeks instead of building momentum."
+            ]
+          },
+          {
+            "title": "Three to six years in",
+            "best": [
+              "You have promoted, found a job you are good at, and built a strong group of friends. Your finances are solid and your skills transfer well.",
+              "You pick up schools, certifications, and a security clearance that make you valuable inside and outside the military. Reenlistment comes with real leverage.",
+              "Leadership notices you. You are given people to lead earlier than expected, and you discover you are good at it."
+            ],
+            "likely": [
+              "You are experienced and capable. Deployments have happened or are coming, and the lifestyle has real costs, but your career is moving forward.",
+              "The novelty is gone and the job is a job, with good months and bad ones. You are saving money, building rank, and weighing whether to stay in.",
+              "Moves and training cycles strain your personal life more than you expected, but professionally you are steady and respected."
+            ],
+            "worst": [
+              "Deployments, a difficult command, or an injury have worn you down, and you are counting the days until you can get out.",
+              "The operational tempo eats your relationships one by one. You are competent at work and increasingly isolated outside of it.",
+              "A stalled promotion or a bad evaluation traps you in place. The years feel like they are passing without building toward anything."
+            ]
+          },
+          {
+            "title": "After you get out",
+            "best": [
+              "You leave with education benefits, healthcare, and leadership experience that employers value. The transition takes work but goes well.",
+              "Your clearance and technical training convert directly into a civilian career that pays more than you expected, with the GI Bill still in your pocket.",
+              "You use the GI Bill immediately, finish a degree debt-free, and enter the civilian workforce years ahead of peers who borrowed their way through."
+            ],
+            "likely": [
+              "Getting out is harder than getting in. Translating your experience for civilian jobs takes effort, and it may take several months to settle.",
+              "The first civilian job underuses you and it is frustrating. Within a year or two you find where your experience actually counts and things level out.",
+              "The structure you complained about turns out to be the thing you miss. Rebuilding routine, purpose, and community takes real, deliberate work."
+            ],
+            "worst": [
+              "You leave without a clear plan or a civilian network, and the first year or two outside the military is a real struggle.",
+              "Benefits paperwork, job searching, and an identity shift hit all at once. Without a plan made before separation, you drift longer than you can afford to.",
+              "You separate with unaddressed physical or mental health needs, and untangling VA claims while job hunting makes the transition twice as hard."
+            ]
+          }
+        ],
+        "ripples": [
+          {
+            "area": "Money",
+            "text": "Your finances improve right away because housing, food, and medical care are covered. The risk comes later, when you separate."
+          },
+          {
+            "area": "Family",
+            "text": "Deployments and moves are hard on the people closest to you. Your relationships carry weight from this decision too."
+          },
+          {
+            "area": "Identity",
+            "text": "The military shapes how you think and handle pressure for the rest of your life."
+          },
+          {
+            "area": "Education",
+            "text": "Education benefits can be worth tens of thousands of dollars. Future you will be glad you used them."
+          },
+          {
+            "area": "Health",
+            "text": "Your body takes a cumulative beating. Documenting every injury now determines your benefits for decades after."
+          },
+          {
+            "area": "Timing",
+            "text": "Contract lengths shape everything else: when you can marry, move, study, or start over. Read yours carefully before signing."
+          }
+        ]
+      },
+      "business": {
+        "label": "Starting a Business",
+        "periods": [
+          {
+            "title": "The first six to twelve months",
+            "best": [
+              "You get an early sign that it works, like a first paying customer. The grind is real but you are no longer guessing.",
+              "A niche you understood better than anyone pays off fast. Revenue arrives months ahead of plan and reinvesting it feels electric.",
+              "Your first customers become your sales force. Referrals compound quietly and you spend more time delivering than chasing."
+            ],
+            "likely": [
+              "You spend the year learning by doing. Some things work, most do not, and money is tight. You are better at it by the end.",
+              "Everything takes three times longer than planned. You cut scope, cut costs, and slowly figure out what people will actually pay for.",
+              "The idea you launched with is not the one that survives the year. Customer feedback bends the business into something more honest."
+            ],
+            "worst": [
+              "You burn through your savings without finding anything that works, and the stress spreads into the rest of your life.",
+              "A partner falls through, a big client cancels, or a supplier fails at the worst moment, and the runway disappears before you find your footing.",
+              "You keep funding the idea past the point the numbers stopped making sense. The savings loss hurts, but the sunk-cost lesson costs more."
+            ]
+          },
+          {
+            "title": "Years two to four",
+            "best": [
+              "You found what works. Your income covers your life, you have real customers, and you own something.",
+              "You hire your first help and the business starts running without you touching everything. Growth stops depending on your hours alone.",
+              "A bigger player notices you. Whether you partner, sell, or keep competing, you now have options most people never get."
+            ],
+            "likely": [
+              "You are still going but you have changed direction at least once. You work more hours for less money, but you are still standing.",
+              "Revenue is real but lumpy. Good quarters fund bad ones, and you have become an expert at stretching cash you did not used to think about.",
+              "The business supports you modestly. It is smaller than the dream but it is yours, and you have stopped apologizing for that."
+            ],
+            "worst": [
+              "The business closes. You are back to job hunting with a gap on your resume and depleted savings.",
+              "A slow decline is worse than a fast failure. You spend two extra years propping up something that never quite dies and never quite lives.",
+              "Debt taken on to save the business follows you after it closes. The recovery plan now has to cover yesterday as well as tomorrow."
+            ]
+          },
+          {
+            "title": "Five to ten years out",
+            "best": [
+              "You built something profitable with value that an employee could not have built. The experience pays off for years.",
+              "The business either sold well or pays you well. Either way, you own your time in a way salaried peers visibly do not.",
+              "What you built became a platform: the second venture, the investing, the advising all trace back to surviving those first years."
+            ],
+            "likely": [
+              "You built something modest that supports you, or you closed it and moved on wiser. Either way it changed how you work.",
+              "Win or lose, employers and partners treat you differently now. Having run something real is a credential no course provides.",
+              "You returned to employment with sharper instincts and less patience for nonsense. The venture reshaped what you accept from work."
+            ],
+            "worst": [
+              "Years of stress and uneven income led to a business that never became stable. Recovery is possible but slow.",
+              "The financial hole from the venture delays everything else by most of a decade: the house, the retirement account, the safety net.",
+              "The failure hardened into fear. You never quite trust your own judgment on risk again, and it quietly shrinks your choices."
+            ]
+          }
+        ],
+        "ripples": [
+          {
+            "area": "Savings",
+            "text": "You need six to twelve months of savings before you start, or financial pressure will force bad decisions."
+          },
+          {
+            "area": "Health",
+            "text": "You lose employer health coverage when you go out on your own. Budget for your own insurance."
+          },
+          {
+            "area": "Time",
+            "text": "Your personal time disappears early on. The people around you will notice before you do."
+          },
+          {
+            "area": "Growth",
+            "text": "Win or lose, you learn more about yourself and business in one year than in many years of regular work."
+          },
+          {
+            "area": "Identity",
+            "text": "When the business struggles it feels personal, because it is. Separating your worth from your revenue is a survival skill."
+          },
+          {
+            "area": "Taxes",
+            "text": "Self-employment taxes and quarterly filings surprise almost everyone. Set aside a percentage of every dollar from day one."
+          }
+        ]
+      },
+      "education": {
+        "label": "Education Decision",
+        "periods": [
+          {
+            "title": "While you are enrolled",
+            "best": [
+              "You find a direction, stay focused, and graduate with a credential, useful experience, and good connections.",
+              "An internship or professor connection turns into a job offer before you even finish. The degree pays for itself on the way out the door.",
+              "The subject lights you up more than you expected. Studying stops feeling like a cost and starts feeling like momentum."
+            ],
+            "likely": [
+              "It is harder than expected. The coursework and the cost are demanding, but you make it through.",
+              "Balancing classes with the rest of your life is a constant negotiation. Some semesters are ugly, but the credits keep stacking.",
+              "Motivation comes and goes in waves. Deadlines, study groups, and stubbornness carry you through the flat stretches."
+            ],
+            "worst": [
+              "You drop out after a year or two with debt but no degree, which is the worst of both worlds.",
+              "Life interrupts: money, family, or health forces a pause that quietly becomes permanent, with loans that do not pause with you.",
+              "You picked the wrong program and realize it too late to switch cheaply. Finishing something you no longer want drains years of energy."
+            ]
+          },
+          {
+            "title": "The first few years after",
+            "best": [
+              "Your credential opens a door that would not have opened otherwise, with better pay and a clearer path.",
+              "You enter your field mid-ladder instead of at the bottom, because the degree plus your work history reads as experience, not just education.",
+              "The alumni network does quiet work for you: an introduction here, a reference there, and doors open faster than applications alone would manage."
+            ],
+            "likely": [
+              "You find a job in or near your field. It is entry level, loan payments begin, and the payoff takes a few years.",
+              "The degree gets you interviews the old resume did not. The salary bump is real but smaller than the brochure implied.",
+              "Loan payments reshape your monthly budget for a while, but the career trajectory is finally pointing the right direction."
+            ],
+            "worst": [
+              "You work a job that does not require your degree while paying off loans, which is frustrating.",
+              "Your field tightened while you studied. Openings are scarce, competition is credentialed, and the loan bill arrives regardless.",
+              "The degree turns out to be the entry ticket, not the differentiator you hoped. You are back to competing on experience you paused to get it."
+            ]
+          },
+          {
+            "title": "Ten to fifteen years from now",
+            "best": [
+              "The degree was a launch point. The credential and connections gave you options that added up over time.",
+              "Promotions that legally or practically required the credential came to you instead of passing you by. The ceiling moved.",
+              "The habit of finishing hard things stuck. The degree mattered, but the discipline it built mattered more."
+            ],
+            "likely": [
+              "Your earnings are somewhat higher than they would have been, and the loans are mostly behind you.",
+              "The degree is now one line among many on your resume. Its biggest gift was the door it opened first, years ago.",
+              "You rarely think about the loans anymore. The math worked out mildly positive, and the confidence was worth something the math misses."
+            ],
+            "worst": [
+              "The field changed faster than your pay, and you are still carrying loan debt later than you hoped.",
+              "Refinancing, deferments, and life events stretched the loans into your forties. The degree paid, but slowly and with interest.",
+              "The credential inflated: what needed a bachelor's now wants a master's, and you feel like you paid full price for a moving target."
+            ]
+          }
+        ],
+        "ripples": [
+          {
+            "area": "Debt",
+            "text": "Every ten thousand dollars you borrow is roughly a hundred dollars a month for ten years. Do the math first."
+          },
+          {
+            "area": "Time",
+            "text": "School is a long commitment. What you do during it often matters more than the degree itself."
+          },
+          {
+            "area": "Network",
+            "text": "The people you meet in school can be valuable connections for decades. Invest in those friendships."
+          },
+          {
+            "area": "Confidence",
+            "text": "Going back to school can change how you see your own potential, which is worth a lot on its own."
+          },
+          {
+            "area": "Career",
+            "text": "Employers may fund part of this. Tuition assistance and military education benefits change the entire cost equation."
+          },
+          {
+            "area": "Momentum",
+            "text": "Pausing income for school has a compounding cost. The earlier the payoff arrives, the more decades it has to work."
+          }
+        ]
+      },
+      "finance": {
+        "label": "Financial Decision",
+        "periods": [
+          {
+            "title": "In the first year",
+            "best": [
+              "You make the move and stay consistent. Your financial foundation starts improving quickly.",
+              "Automating the plan removes willpower from the equation. The balance grows without you negotiating with yourself every month.",
+              "An early win, a debt cleared or a fund milestone hit, gives the plan emotional fuel that spreadsheets never could."
+            ],
+            "likely": [
+              "You start strong but life interrupts the plan. Progress is real but messier than you imagined.",
+              "Two steps forward, one step back. An unexpected bill dents a month here and there, but the yearly trend line still points up.",
+              "The hardest part is not the math but the habit. By the end of the year the habit mostly exists, which is the real victory."
+            ],
+            "worst": [
+              "An unexpected expense or just how hard the habit is to keep derails the plan, and you end up where you started.",
+              "You start at a bad moment: a market dip, a rate spike, or a job wobble tests your nerve early and you pull out at the worst time.",
+              "Lifestyle creep quietly eats the plan. The money that was supposed to move never quite does, and December looks like January."
+            ]
+          },
+          {
+            "title": "Three to five years in",
+            "best": [
+              "The early consistency is paying off in a way you can clearly see in your accounts or your monthly cash flow.",
+              "Compounding stops being a word and becomes a number you can point to. The gains now earn their own gains.",
+              "Freedom arrives in small doses first: a bad job you could afford to leave, an emergency that was merely annoying instead of devastating."
+            ],
+            "likely": [
+              "You are better off than if you had done nothing, with some setbacks along the way. The trend is positive.",
+              "The plan survived a rough patch or two, adjusted, and kept going. It is less ambitious than version one and far more durable.",
+              "Progress feels invisible day to day and obvious year to year. You have stopped checking the balance obsessively, which is its own progress."
+            ],
+            "worst": [
+              "Without steady follow through, you are about where you started, or a risk you took did not pay off.",
+              "A concentrated bet went wrong and undid three years of steady saving. Diversification stops being boring advice after that.",
+              "Stops and restarts ate the compounding. The account is bigger, but nowhere near what the same money moved steadily would have built."
+            ]
+          },
+          {
+            "title": "Ten to twenty years from now",
+            "best": [
+              "This decision, made early and kept up, becomes one of the most valuable financial choices of your life.",
+              "The number is large enough now that your money makes more in a good year than you once did. Work has become a choice.",
+              "You quietly become the person in your family others come to for help, because the discipline you started back then compounded into security."
+            ],
+            "likely": [
+              "You built something real and have options that people who did not start do not have.",
+              "You will not retire absurdly early, but you will retire on your own terms, and the gap between you and those who never started is now enormous.",
+              "The habit outlasted every market cycle it met. The balance matters, but the durability of the habit is what actually changed your life."
+            ],
+            "worst": [
+              "Inconsistency or a single large mistake wore down what you built, and recovery is slow.",
+              "Raiding the account during hard years reset the clock more than once. The compounding never got its long, uninterrupted run.",
+              "The plan worked but life got more expensive faster: kids, health, or housing outran the growth, and the cushion is thinner than the years suggest."
+            ]
+          }
+        ],
+        "ripples": [
+          {
+            "area": "Stress",
+            "text": "Financial security pays you back in peace of mind before it pays you back in dollars."
+          },
+          {
+            "area": "Options",
+            "text": "Money buys you choices, like the ability to leave a bad job or handle an emergency."
+          },
+          {
+            "area": "Habits",
+            "text": "Money habits build up like interest. The patterns you set now are hard to change later."
+          },
+          {
+            "area": "Timing",
+            "text": "The best time to start was years ago. The second best time is now."
+          },
+          {
+            "area": "Relationships",
+            "text": "Money decisions made alone strain shared lives. If someone shares your finances, they need to share the plan."
+          },
+          {
+            "area": "Knowledge",
+            "text": "The first year teaches you more about your own psychology than about markets. Both lessons are worth money."
+          }
+        ]
+      },
+      "health": {
+        "label": "Health and Lifestyle",
+        "periods": [
+          {
+            "title": "The first few months",
+            "best": [
+              "The habit takes hold faster than expected. You feel the difference, and that keeps you going.",
+              "Sleep improves first, then energy, then mood. The early wins show up everywhere except the mirror, and they are enough.",
+              "You find a version of the habit you actually enjoy, and it stops requiring discipline almost immediately."
+            ],
+            "likely": [
+              "You start strong, hit a wall after a few weeks, and have to recommit. Progress is real but uneven.",
+              "Week three is the fight. The novelty is gone, results are invisible, and pushing through that flat stretch is the whole game.",
+              "You miss days and learn the skill that matters most: restarting without turning one missed day into a lost month."
+            ],
+            "worst": [
+              "Old habits pull you back. Without changing your routine, the new habit does not stick.",
+              "You change the behavior without changing the environment around it, and the environment wins within six weeks.",
+              "An all-or-nothing approach cracks on the first bad week, and the guilt of quitting makes restarting harder than starting was."
+            ]
+          },
+          {
+            "title": "Six months to two years",
+            "best": [
+              "The change is visible and felt. It has become part of who you are rather than something you are trying to do.",
+              "People start asking what you are doing differently. The habit has produced results that others can see before you fully do.",
+              "The identity shift completes: skipping it now feels strange, the way the habit itself used to feel."
+            ],
+            "likely": [
+              "You have made real progress with some setbacks, and you are better off than when you started.",
+              "The routine survives holidays, travel, and one genuinely bad stretch. It is smaller than your ambitious plan and vastly more permanent.",
+              "Progress plateaus and you learn to keep going without visible rewards. That patience becomes the actual skill."
+            ],
+            "worst": [
+              "You have started and stopped several times, and the inconsistency is discouraging.",
+              "Each restart is a little heavier than the last. The gap between who you want to be and what you do widens quietly.",
+              "A setback, an injury, a relapse, a hard season, knocks you off entirely, and without support the road back keeps not starting."
+            ]
+          },
+          {
+            "title": "Five to ten years from now",
+            "best": [
+              "This quietly became one of the best things you did for yourself, and your health reflects it.",
+              "Numbers your doctor tracks moved the right direction years ago and stayed there. You bought future decades with past discipline.",
+              "The habit rippled outward: it changed how you eat, sleep, work, and handle stress. One decision turned out to be five."
+            ],
+            "likely": [
+              "You are healthier than you would have been, even if the path was not perfectly smooth.",
+              "The habit persists in a sustainable, imperfect form. You are not an athlete; you are simply someone who never stopped, which matters more.",
+              "You cannot prove the counterfactual, but your energy and your checkups suggest the version of you who never started is worse off."
+            ],
+            "worst": [
+              "The habit never really stuck, and health risks that were avoidable are now more present.",
+              "The problem you could have addressed cheaply with habits now requires medication, procedures, or restrictions. The window was real.",
+              "Watching the consequences arrive on schedule, exactly as warned, adds regret to a health burden that discipline alone can no longer fix."
+            ]
+          }
+        ],
+        "ripples": [
+          {
+            "area": "Energy",
+            "text": "Physical health affects how you show up at work, at home, and everywhere else."
+          },
+          {
+            "area": "Cost",
+            "text": "Preventable health problems get expensive over time. Acting now is far cheaper than treating later."
+          },
+          {
+            "area": "Mood",
+            "text": "Physical and mental health are closely connected. What you do with your body affects how you feel."
+          },
+          {
+            "area": "Identity",
+            "text": "The change sticks when you stop seeing it as something you are trying and start seeing it as who you are."
+          },
+          {
+            "area": "Environment",
+            "text": "Willpower loses to environment over time. Change what surrounds you and the habit gets dramatically easier."
+          },
+          {
+            "area": "People",
+            "text": "The habits of the five people closest to you pull on yours constantly. Recruit at least one of them."
+          }
+        ]
+      },
+      "relationships": {
+        "label": "Relationship Decision",
+        "periods": [
+          {
+            "title": "In the near term",
+            "best": [
+              "The decision brings welcome clarity. You both adjust, and the new situation feels better than the uncertainty did.",
+              "The conversation you dreaded goes better than any version you rehearsed. Honesty turns out to be a relief for both of you.",
+              "Once the decision is made, energy you spent managing doubt comes back to you almost immediately, and life feels lighter within weeks."
+            ],
+            "likely": [
+              "The first stretch is harder than expected, even if it was the right call. There is an adjustment period either way.",
+              "Waves of second-guessing hit at random hours. They pass, and each week the new normal feels slightly less strange.",
+              "Logistics keep the emotions company: living arrangements, shared accounts, mutual friends. Untangling or combining lives is unglamorous work."
+            ],
+            "worst": [
+              "The decision sets off conflict or an emotional fallout that disrupts your daily life for months.",
+              "The other person's reaction is worse than you feared, and the fallout pulls in family, friends, and finances all at once.",
+              "You handle the decision badly in the moment, and the way it happened causes more lasting damage than the decision itself."
+            ]
+          },
+          {
+            "title": "One to three years later",
+            "best": [
+              "Looking back, the decision was clearly right, and your life fits you better than before.",
+              "What replaced the old situation, whether independence or a healthier bond, is something you could not have imagined from inside the old one.",
+              "The relationships around you improved too: friends, family, even your own patience. Resolving one strained bond lifted several others."
+            ],
+            "likely": [
+              "You have adjusted and rebuilt. There are still ripple effects, but you are moving forward.",
+              "You understand your own patterns better now. The decision taught you what you tolerate, what you need, and what you repeat.",
+              "There are still hard anniversaries and awkward gatherings, but they are events now, not the weather."
+            ],
+            "worst": [
+              "The decision opened a longer chapter of difficulty than you expected, and recovery is slow.",
+              "Legal or financial entanglements outlast the emotions by years, and every document reopens something you thought had closed.",
+              "You repeated the pattern in the next relationship, because the decision changed your situation without changing your habits."
+            ]
+          },
+          {
+            "title": "Five to ten years from now",
+            "best": [
+              "This became one of the clearest right decisions you made, and the benefits show up everywhere.",
+              "The peace is the proof. The life built after the decision is calmer and more honest than the one that required it.",
+              "You can finally tell the story without a knot in your chest, and what you learned protects every relationship you have now."
+            ],
+            "likely": [
+              "The decision is part of your story but not the whole story. You were shaped by it but not stuck in it.",
+              "Time reframed it: less a wound, more a chapter. The lessons stayed useful long after the pain stopped being daily.",
+              "You and the other person both moved on into different lives. From this distance, the decision looks less dramatic and more inevitable."
+            ],
+            "worst": [
+              "Long term effects, especially if children or shared money were involved, are still present years later.",
+              "Co-parenting or shared obligations keep the old conflict on a schedule. You manage it, but it never fully leaves the calendar.",
+              "Bitterness became a habit that outlived its cause, and it cost you connections that had nothing to do with the original decision."
+            ]
+          }
+        ],
+        "ripples": [
+          {
+            "area": "Money",
+            "text": "Relationship decisions are also financial decisions that can reshape your finances for years."
+          },
+          {
+            "area": "Children",
+            "text": "If children are involved, this becomes a co-parenting decision that does not simply end."
+          },
+          {
+            "area": "Friends",
+            "text": "Your social circle will shift. Some friendships fade and new ones form."
+          },
+          {
+            "area": "Growth",
+            "text": "How you handle this shapes how you will handle the next important relationship in your life."
+          },
+          {
+            "area": "Home",
+            "text": "Living situations change with relationships. Leases, mortgages, and moving costs arrive alongside the emotions."
+          },
+          {
+            "area": "Health",
+            "text": "Relationship stress shows up in sleep, appetite, and focus. Taking care of your body is part of surviving the transition."
+          }
+        ]
+      },
+      "location": {
+        "label": "Location / Move",
+        "periods": [
+          {
+            "title": "The first six months",
+            "best": [
+              "You settle in well. The new place clicks, you find your people, and the reason you moved starts paying off.",
+              "A neighbor, coworker, or club pulls you into a social circle within the first month, and the city starts feeling like yours absurdly fast.",
+              "The change of scenery resets habits you had been stuck in for years. New place, new routines, and they are better ones."
+            ],
+            "likely": [
+              "The first months are lonely. You are building a life from scratch, and it takes time to feel at home.",
+              "Everything requires effort that used to be automatic: doctors, haircuts, groceries, friends. The mental load is the real moving cost.",
+              "You compare everything to back home for a while. Somewhere around month four, you catch yourself giving directions to a stranger and realize you live here now."
+            ],
+            "worst": [
+              "The move does not deliver what you hoped. The job, the cost, or the isolation is worse than you expected.",
+              "The job that justified the move changes or disappears shortly after you arrive, and you are stranded in an expensive decision.",
+              "Homesickness hits harder than you planned for, and the distance from your support system turns every small problem into a bigger one."
+            ]
+          },
+          {
+            "title": "One to two years in",
+            "best": [
+              "You have built a real life here, and the career or financial reason you moved is paying off.",
+              "The bet on the new market pays: your career or your cost of living improved enough that the disruption already justified itself.",
+              "You stopped saying back home about the old place. This is home now, and it happened without you noticing the switch."
+            ],
+            "likely": [
+              "You have settled in. You miss some things about where you were, but you made it work.",
+              "You have your places now: the coffee shop, the gym, the two real friends. It is a smaller life than before, but it is genuinely yours.",
+              "The move cost more, in money and energy, than planned, and delivered a bit less. Still, on balance, you would do it again."
+            ],
+            "worst": [
+              "You are thinking about moving back or moving again, and the cost of the move is weighing on you.",
+              "You never quite landed socially, and the isolation is shaping your mood, your work, and your weekends more than you admit.",
+              "The finances did not work: rent, taxes, or the cost of living ate the raise that justified the move."
+            ]
+          },
+          {
+            "title": "Five or more years out",
+            "best": [
+              "The move was one of the best decisions you made, and at least one big reason for it paid off.",
+              "The person you became in the new place, the career, the relationships, the independence, simply does not exist in the version that stayed.",
+              "Roots grew deeper than you expected: the place changed you and now the idea of having stayed feels like a life that belonged to someone else."
+            ],
+            "likely": [
+              "It was the right call even if the payoff was slower than expected. You built roots here.",
+              "Home is a more complicated word now. You belong to two places, miss one from inside the other, and have made peace with that.",
+              "The move was neither triumph nor mistake: a lateral shift that mattered less than the people and habits you brought to it."
+            ],
+            "worst": [
+              "Looking back, the move cost more than it gave, in relationships or opportunities left behind.",
+              "Aging parents and missed milestones back home turned distance into guilt. The move gave you a career and charged you in visits.",
+              "You kept moving, chasing a feeling of home that never arrived, and each move reset friendships and savings a little more."
+            ]
+          }
+        ],
+        "ripples": [
+          {
+            "area": "Cost",
+            "text": "Moving costs several thousand dollars before you are settled. Budget for higher expenses at first."
+          },
+          {
+            "area": "Social",
+            "text": "Building a social life in a new place takes one to two years of real effort."
+          },
+          {
+            "area": "Career",
+            "text": "Being in the right place for your field can be a real boost to your career."
+          },
+          {
+            "area": "Family",
+            "text": "Distance from family changes the holidays, the emergencies, and the everyday closeness."
+          },
+          {
+            "area": "Cost of Living",
+            "text": "A raise can vanish into rent and taxes. Compare take-home life, not just salary, before you commit."
+          },
+          {
+            "area": "Partner",
+            "text": "If someone moves with you, their career and friendships pay part of your move's price. Plan for both lives, not one."
+          }
+        ]
+      }
+    };
+
+    // ===========================================================
+    // DATA: example decisions and categories
+    // ===========================================================
+    var exampleDecisions = [
+      { text: "Quit my job without another one lined up", category: "career" },
+      { text: "Enlist in the Army at 20", category: "military" },
+      { text: "Drop out of college to start a business", category: "education" },
+      { text: "Put my savings into index funds", category: "finance" },
+      { text: "Move to a new city for a higher-paying job", category: "location" },
+      { text: "Go back to school for a master's degree", category: "education" }
+    ];
+
+    var categories = ["career", "finance", "health", "relationships", "location", "military", "education"];
+
+    // ===========================================================
+    // GLOBAL VARIABLES
+    // ===========================================================
+    var selectedCategory = "career";
+    var currentResults = null;
+    var currentView = "timeline";
+    var currentSnapshotType = "likely";
+
+    // ===========================================================
+    // DATA: short intro phrases used to reword the outcomes.
+    // Each time the user runs or re-runs, one phrase from each
+    // group is picked at random and added to the front of the
+    // outcome. This makes every run feel a little different.
+    // ===========================================================
+    var introPhrases = {
+      best: [
+        "In the best case, ",
+        "If things break your way, ",
+        "On the bright side, ",
+        "At its best, "
+      ],
+      likely: [
+        "Most likely, ",
+        "Realistically, ",
+        "More often than not, ",
+        "In all likelihood, "
+      ],
+      worst: [
+        "In the worst case, ",
+        "If things go poorly, ",
+        "On the harder end, ",
+        "At its worst, "
+      ]
+    };
+
+    // Pick a random item from an array
+    function pickRandom(list) {
+      var index = Math.floor(Math.random() * list.length);
+      return list[index];
+    }
+
+    // Lowercase the first letter of a sentence so the intro phrase
+    // flows into it naturally (for example "You land..." becomes
+    // "if things break your way, you land...")
+    function lowerFirstLetter(sentence) {
+      return sentence.charAt(0).toLowerCase() + sentence.slice(1);
+    }
+
+    // Add a random intro phrase to an outcome sentence
+    function rewordOutcome(type, sentence) {
+      var intro = pickRandom(introPhrases[type]);
+      return intro + lowerFirstLetter(sentence);
+    }
+
+    // ===========================================================
+    // VARIANT PICKER with memory.
+    // Each outcome now has several different written versions.
+    // We remember which version was shown last for each slot so
+    // that hitting Re-run never repeats the same one twice in
+    // a row.
+    // ===========================================================
+    var lastVariantChoice = {};
+
+    function pickVariant(variantList, slotKey) {
+      // if there is only one version, there is nothing to vary
+      if (variantList.length === 1) {
+        return variantList[0];
+      }
+      var index = Math.floor(Math.random() * variantList.length);
+      // re-roll once if we picked the same version as last time
+      if (index === lastVariantChoice[slotKey]) {
+        index = (index + 1) % variantList.length;
+      }
+      lastVariantChoice[slotKey] = index;
+      return variantList[index];
+    }
+
+    // Randomly choose a few ripple effects from the domain's pool,
+    // so the "what else this affects" list also changes between runs
+    function pickRipples(pool, howMany) {
+      var copy = pool.slice(); // copy so we do not change the original
+      var chosen = [];
+      while (chosen.length < howMany && copy.length > 0) {
+        var i = Math.floor(Math.random() * copy.length);
+        chosen.push(copy[i]);
+        copy.splice(i, 1); // remove it so it cannot be picked twice
+      }
+      return chosen;
+    }
+
+    // ===========================================================
+    // SETUP when the page loads
+    // ===========================================================
+
+    // ===========================================================
+    // CINEMATIC SCROLL EFFECTS
+    // Reveal-on-scroll: content fades and rises as it enters the
+    // viewport. Parallax: the hero background and butterfly move
+    // at different speeds, which creates depth while scrolling.
+    // ===========================================================
+
+    // pick which elements should reveal as you scroll
+    function setupReveals() {
+      var targets = document.querySelectorAll(
+        "#page-about .card, #page-marketing .card, #page-marketing .stat-card, " +
+        "#page-guide .card, .preview-card, .band-label, .marketing-cta"
+      );
+      for (var i = 0; i < targets.length; i++) {
+        targets[i].classList.add("reveal");
+      }
+
+      // safety: if the browser does not support IntersectionObserver,
+      // just show everything immediately instead of hiding it forever
+      if (!window.IntersectionObserver) {
+        var allReveals = document.querySelectorAll(".reveal");
+        for (var m = 0; m < allReveals.length; m++) {
+          allReveals[m].classList.add("visible");
+        }
+        return;
+      }
+
+      // IntersectionObserver watches each element and adds the
+      // visible class the first time it scrolls into view
+      var observer = new IntersectionObserver(function (entries) {
+        for (var j = 0; j < entries.length; j++) {
+          if (entries[j].isIntersecting) {
+            entries[j].target.classList.add("visible");
+            observer.unobserve(entries[j].target);
+          }
+        }
+      }, { threshold: 0.15 });
+
+      var revealEls = document.querySelectorAll(".reveal");
+      for (var k = 0; k < revealEls.length; k++) {
+        observer.observe(revealEls[k]);
+      }
+    }
+
+    // mouse tilt: the hero stack leans gently toward the cursor,
+    // which makes the layered words and butterfly feel physically 3D
+    function setupHeroTilt() {
+      var hero = document.querySelector(".hero-cinematic");
+      var stack = document.getElementById("heroStack");
+      if (!hero || !stack) {
+        return;
+      }
+      hero.addEventListener("mousemove", function (event) {
+        var rect = hero.getBoundingClientRect();
+        // how far the cursor is from the center, from -1 to 1
+        var dx = (event.clientX - rect.left) / rect.width - 0.5;
+        var dy = (event.clientY - rect.top) / rect.height - 0.5;
+        stack.style.transform =
+          "rotateY(" + (dx * 7) + "deg) rotateX(" + (-dy * 6) + "deg)";
+      });
+      hero.addEventListener("mouseleave", function () {
+        stack.style.transform = "rotateY(0deg) rotateX(0deg)";
+      });
+    }
+
+    // ===========================================================
+    // COUNT-UP NUMBERS
+    // Stat numbers (like 100%) start at zero and climb to their
+    // real value the first time they scroll into view.
+    // ===========================================================
+    function setupCountUps() {
+      var numbers = document.querySelectorAll(".stat-number");
+      if (!window.IntersectionObserver || numbers.length === 0) {
+        return;
+      }
+
+      var seen = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            startCount(entries[i].target);
+            seen.unobserve(entries[i].target);
+          }
+        }
+      }, { threshold: 0.5 });
+
+      for (var j = 0; j < numbers.length; j++) {
+        numbers[j].setAttribute("data-target", numbers[j].textContent);
+        seen.observe(numbers[j]);
+      }
+    }
+
+    function startCount(el) {
+      var raw = el.getAttribute("data-target");     // e.g. "100%" or "216"
+      var suffix = raw.indexOf("%") !== -1 ? "%" : "";
+      var target = parseInt(raw, 10);
+      if (isNaN(target)) {
+        return;
+      }
+      if (target === 0) {
+        el.textContent = raw;                        // nothing to climb to
+        return;
+      }
+      var duration = 1300;                           // ms
+      var startTime = null;
+
+      function tick(now) {
+        if (startTime === null) {
+          startTime = now;
+        }
+        var progress = Math.min((now - startTime) / duration, 1);
+        // ease-out: fast at first, slowing as it lands
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) {
+          window.requestAnimationFrame(tick);
+        }
+      }
+      window.requestAnimationFrame(tick);
+    }
+
+    // parallax + scroll zoom, throttled with requestAnimationFrame.
+    // The browser now updates these once per frame instead of on
+    // every scroll event, which removes the lag.
+    var scrollTicking = false;
+
+    function onScrollFrame() {
+      var y = window.scrollY;
+      var bg = document.getElementById("heroBg");
+      var stack = document.getElementById("heroStack");
+      var hero = document.querySelector(".hero-cinematic");
+
+      if (bg) {
+        bg.style.transform = "translate3d(0," + (y * 0.3) + "px,0) scale(1.08)";
+      }
+
+      // scroll zoom: as you scroll past the hero, it zooms toward you
+      // and fades, like moving through it into the next section
+      if (stack && hero && currentPage === "home") {
+        var progress = Math.min(y / (hero.offsetHeight * 0.9), 1);
+        var zoom = 1 + progress * 0.35;
+        stack.style.opacity = 1 - progress * 1.15;
+        stack.style.transform = tiltTransform + " scale(" + zoom + ")";
+      }
+      scrollTicking = false;
+    }
+
+    function setupParallax() {
+      window.addEventListener("scroll", function () {
+        if (!scrollTicking) {
+          scrollTicking = true;
+          window.requestAnimationFrame(onScrollFrame);
+        }
+      }, { passive: true });
+    }
+
+    // mouse tilt, also frame-throttled, and skipped on touch screens
+    var tiltTransform = "";
+    var tiltTicking = false;
+
+    function setupHeroTilt() {
+      var hero = document.querySelector(".hero-cinematic");
+      var stack = document.getElementById("heroStack");
+      if (!hero || !stack) {
+        return;
+      }
+      // touch devices have no hover cursor, so skip the effect there
+      if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) {
+        return;
+      }
+      hero.addEventListener("mousemove", function (event) {
+        if (tiltTicking) {
+          return;
+        }
+        tiltTicking = true;
+        window.requestAnimationFrame(function () {
+          var rect = hero.getBoundingClientRect();
+          var dx = (event.clientX - rect.left) / rect.width - 0.5;
+          var dy = (event.clientY - rect.top) / rect.height - 0.5;
+          tiltTransform = "rotateY(" + (dx * 6) + "deg) rotateX(" + (-dy * 5) + "deg)";
+          stack.style.transform = tiltTransform;
+          tiltTicking = false;
+        });
+      });
+      hero.addEventListener("mouseleave", function () {
+        tiltTransform = "";
+        stack.style.transform = "";
+      });
+    }
+
+    window.onload = function () {
+      buildExampleButtons();
+      buildCategoryButtons();
+      setupReveals();
+      setupParallax();
+      setupHeroTilt();
+      setupCountUps();
+    };
+
+    function buildExampleButtons() {
+      var container = document.getElementById("exampleButtons");
+      for (var i = 0; i < exampleDecisions.length; i++) {
+        var example = exampleDecisions[i];
+        var button = document.createElement("button");
+        button.className = "example-button";
+        button.textContent = example.text;
+        button.onclick = createExampleHandler(example);
+        container.appendChild(button);
+      }
+    }
+
+    function createExampleHandler(example) {
+      return function () {
+        document.getElementById("decisionInput").value = example.text;
+        selectedCategory = example.category;
+        updateCharCount();
+        updateCategoryButtons();
+      };
+    }
+
+    function buildCategoryButtons() {
+      var container = document.getElementById("categoryButtons");
+      for (var i = 0; i < categories.length; i++) {
+        var category = categories[i];
+        var button = document.createElement("button");
+        button.className = "category-button";
+        button.textContent = capitalize(category);
+        button.setAttribute("data-category", category);
+        button.onclick = createCategoryHandler(category);
+        container.appendChild(button);
+      }
+      updateCategoryButtons();
+    }
+
+    function createCategoryHandler(category) {
+      return function () {
+        selectedCategory = category;
+        updateCategoryButtons();
+      };
+    }
+
+    function updateCategoryButtons() {
+      var buttons = document.getElementsByClassName("category-button");
+      for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].getAttribute("data-category") === selectedCategory) {
+          buttons[i].classList.add("active");
+        } else {
+          buttons[i].classList.remove("active");
+        }
+      }
+    }
+
+    // ===========================================================
+    // INPUT HELPERS
+    // ===========================================================
+    function updateCharCount() {
+      var input = document.getElementById("decisionInput");
+      document.getElementById("charCount").textContent = input.value.length + " / 200";
+      document.getElementById("validationMessage").textContent = "";
+      input.classList.remove("input-error");
+    }
+
+    // Let the user press Ctrl+Enter (or Cmd+Enter on Mac) to run
+    function handleKeyPress(event) {
+      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+        analyzeDecision();
+      }
+    }
+
+    function toggleSituation() {
+      var fields = document.getElementById("situationFields");
+      var toggle = document.getElementById("situationToggle");
+      if (fields.style.display === "none") {
+        fields.style.display = "flex";
+        toggle.textContent = "- Hide your situation";
+      } else {
+        fields.style.display = "none";
+        toggle.textContent = "+ Add your situation (optional)";
+      }
+    }
+
+
+    function capitalize(word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+
+    // ===========================================================
+    // DECISION ENGINE
+    // ===========================================================
+    function detectDomain(text) {
+      var lowerText = text.toLowerCase();
+      var bestDomain = "";
+      var bestScore = 0;
+
+      for (var domain in domainKeywords) {
+        var keywords = domainKeywords[domain];
+        var score = 0;
+        for (var i = 0; i < keywords.length; i++) {
+          if (lowerText.indexOf(keywords[i]) !== -1) {
+            score = score + 1;
+          }
+        }
+        if (score > bestScore) {
+          bestScore = score;
+          bestDomain = domain;
+        }
+      }
+
+      if (bestDomain === "") {
+        bestDomain = selectedCategory;
+      }
+      return bestDomain;
+    }
+
+    function buildResults(decision, context, age) {
+      var domain = detectDomain(decision + " " + context + " " + selectedCategory);
+
+      if (!pathData[domain]) {
+        domain = "career";
+      }
+      var data = pathData[domain];
+
+      var note = "";
+      var combined = (decision + " " + context).toLowerCase();
+      if (combined.indexOf("kid") !== -1 || combined.indexOf("child") !== -1) {
+        note = " With kids depending on you, the downside carries more weight.";
+      } else if (combined.indexOf("married") !== -1 || combined.indexOf("partner") !== -1) {
+        note = " Your partner is part of this too, so the effects reach both of you.";
+      } else if (combined.indexOf("no savings") !== -1 || combined.indexOf("debt") !== -1) {
+        note = " Without a savings cushion, the margin for error here is thin.";
+      } else if (age !== "" && parseInt(age) < 25) {
+        note = " At your age, you have time to recover from the worst case, which is a real advantage.";
+      }
+
+      var periods = [];
+      for (var i = 0; i < data.periods.length; i++) {
+        var period = data.periods[i];
+
+        // pick one of several written versions for each outcome,
+        // then add a random intro phrase on top. Between the two,
+        // every run tells the story a genuinely different way.
+        var slotBase = domain + "-" + i + "-";
+        var bestText = rewordOutcome("best", pickVariant(period.best, slotBase + "best"));
+        var likelyText = rewordOutcome("likely", pickVariant(period.likely, slotBase + "likely"));
+        var worstText = rewordOutcome("worst", pickVariant(period.worst, slotBase + "worst"));
+
+        // add the situation note to the first period's likely path
+        if (i === 0 && note !== "") {
+          likelyText = likelyText + note;
+        }
+
+        periods.push({
+          title: period.title,
+          best: bestText,
+          likely: likelyText,
+          worst: worstText
+        });
+      }
+
+      var summary = decision;
+      if (summary.length > 110) {
+        summary = summary.substring(0, 107) + "...";
+      }
+
+      // look up the friendly name and color for this decision type
+      var info = domainInfo[domain];
+      var domainName = data.label;
+      var domainColor = "#6d5fd6";
+      if (info) {
+        domainName = info.name;
+        domainColor = info.color;
+      }
+
+      return {
+        summary: summary,
+        domain: domain,
+        domainLabel: data.label,
+        domainName: domainName,
+        domainColor: domainColor,
+        periods: periods,
+        ripples: pickRipples(data.ripples, 4)
+      };
+    }
+
+    // ===========================================================
+    // MAIN ACTION
+    // ===========================================================
+    function analyzeDecision() {
+      var decision = document.getElementById("decisionInput").value.trim();
+      var context = document.getElementById("contextInput").value;
+      var age = document.getElementById("ageInput").value;
+
+      if (decision === "") {
+        showValidation("Please tell me what decision you are considering.");
+        return;
+      }
+      if (decision.length < 6) {
+        showValidation("Please add a little more detail.");
+        return;
+      }
+
+      // remember whether this is the first run or a re-run
+      var isFirstRun = (currentResults === null);
+
+      // show the butterfly splash the instant the button is clicked
+      document.getElementById("pathSplash").classList.add("show");
+      document.getElementById("resultsArea").style.display = "none";
+      document.getElementById("emptyState").style.display = "none";
+
+      setTimeout(function () {
+        currentResults = buildResults(decision, context, age);
+        displayResults();
+        document.getElementById("pathSplash").classList.remove("show");
+        document.getElementById("resultsArea").style.display = "block";
+        document.getElementById("copyButton").style.display = "inline-block";
+        document.getElementById("rerunButton").style.display = "inline-block";
+
+        // only scroll down on the first run, not on every re-run
+        if (isFirstRun) {
+          document.getElementById("resultsArea").scrollIntoView({ behavior: "smooth" });
+        }
+      }, 1500);
+    }
+
+    function showValidation(message) {
+      document.getElementById("validationMessage").textContent = message;
+      document.getElementById("decisionInput").classList.add("input-error");
+    }
+
+    // ===========================================================
+    // DISPLAY
+    // ===========================================================
+    function displayResults() {
+      document.getElementById("summaryText").textContent = currentResults.summary;
+
+      // show the detected category as a small colored badge
+      var badge = document.getElementById("domainBadge");
+      badge.textContent = currentResults.domainName;
+      badge.style.color = currentResults.domainColor;
+      badge.style.borderColor = currentResults.domainColor;
+
+      buildTimelineView();
+      buildSnapshotView();
+      buildRippleList();
+      setView(currentView);
+    }
+
+    function buildTimelineView() {
+      var container = document.getElementById("timelineView");
+      container.innerHTML = "";
+
+      for (var i = 0; i < currentResults.periods.length; i++) {
+        var period = currentResults.periods[i];
+
+        var titleEl = document.createElement("p");
+        titleEl.className = "period-title";
+        titleEl.textContent = period.title;
+        container.appendChild(titleEl);
+
+        var baseDelay = i * 260;
+        container.appendChild(createPathCard("best", "Best case", period.best, baseDelay));
+        container.appendChild(createPathCard("likely", "Most likely", period.likely, baseDelay + 90));
+        container.appendChild(createPathCard("worst", "Worst case", period.worst, baseDelay + 180));
+      }
+    }
+
+    function createPathCard(type, label, text, delayMs) {
+      var card = document.createElement("div");
+      card.className = "path-card " + type;
+      // each card enters slightly after the one before it
+      card.style.animationDelay = delayMs + "ms";
+
+      var header = document.createElement("div");
+      header.className = "path-header";
+
+      var icon = document.createElement("span");
+      icon.className = "path-icon " + type;
+      if (type === "best") {
+        icon.innerHTML = "&#8593;";
+      } else if (type === "likely") {
+        icon.innerHTML = "&#8594;";
+      } else {
+        icon.innerHTML = "&#8595;";
+      }
+
+      var labelEl = document.createElement("span");
+      labelEl.className = "path-label " + type;
+      labelEl.textContent = label;
+
+      header.appendChild(icon);
+      header.appendChild(labelEl);
+
+      var textEl = document.createElement("p");
+      textEl.className = "path-text";
+      textEl.textContent = text;
+
+      card.appendChild(header);
+      card.appendChild(textEl);
+      return card;
+    }
+
+    function buildSnapshotView() {
+      var grid = document.getElementById("snapshotGrid");
+      grid.innerHTML = "";
+
+      for (var i = 0; i < currentResults.periods.length; i++) {
+        var period = currentResults.periods[i];
+        var card = document.createElement("div");
+        card.className = "snapshot-card " + currentSnapshotType;
+        card.style.animationDelay = (i * 130) + "ms";
+
+        var titleEl = document.createElement("p");
+        titleEl.className = "snapshot-period";
+        titleEl.textContent = period.title;
+
+        var textEl = document.createElement("p");
+        textEl.className = "snapshot-text";
+        textEl.textContent = period[currentSnapshotType];
+
+        card.appendChild(titleEl);
+        card.appendChild(textEl);
+        grid.appendChild(card);
+      }
+    }
+
+    function buildRippleList() {
+      var list = document.getElementById("rippleList");
+      list.innerHTML = "";
+
+      for (var i = 0; i < currentResults.ripples.length; i++) {
+        var ripple = currentResults.ripples[i];
+        var row = document.createElement("div");
+        row.className = "ripple-row";
+        row.style.animationDelay = (i * 110) + "ms";
+
+        var areaEl = document.createElement("p");
+        areaEl.className = "ripple-area";
+        areaEl.textContent = ripple.area;
+
+        var textEl = document.createElement("p");
+        textEl.className = "ripple-text";
+        textEl.textContent = ripple.text;
+
+        row.appendChild(areaEl);
+        row.appendChild(textEl);
+        list.appendChild(row);
+      }
+    }
+
+    // ===========================================================
+    // VIEW CONTROLS
+    // ===========================================================
+    function setView(view) {
+      currentView = view;
+      if (view === "timeline") {
+        document.getElementById("timelineView").style.display = "block";
+        document.getElementById("snapshotView").style.display = "none";
+        document.getElementById("timelineViewButton").classList.add("active");
+        document.getElementById("snapshotViewButton").classList.remove("active");
+      } else {
+        document.getElementById("timelineView").style.display = "none";
+        document.getElementById("snapshotView").style.display = "block";
+        document.getElementById("timelineViewButton").classList.remove("active");
+        document.getElementById("snapshotViewButton").classList.add("active");
+      }
+    }
+
+    function setSnapshotType(type) {
+      currentSnapshotType = type;
+
+      document.getElementById("snapBestButton").classList.remove("active");
+      document.getElementById("snapLikelyButton").classList.remove("active");
+      document.getElementById("snapWorstButton").classList.remove("active");
+      if (type === "best") {
+        document.getElementById("snapBestButton").classList.add("active");
+      } else if (type === "likely") {
+        document.getElementById("snapLikelyButton").classList.add("active");
+      } else {
+        document.getElementById("snapWorstButton").classList.add("active");
+      }
+
+      if (currentResults) {
+        buildSnapshotView();
+      }
+    }
+
+    // ===========================================================
+    // COPY RESULTS
+    // ===========================================================
+    function copyResults() {
+      if (!currentResults) {
+        return;
+      }
+
+      var text = "The Butterfly Effect\n";
+      text = text + "Decision: " + currentResults.summary + "\n";
+
+      for (var i = 0; i < currentResults.periods.length; i++) {
+        var period = currentResults.periods[i];
+        text = text + "\n" + period.title + ":\n";
+        text = text + "  Best case: " + period.best + "\n";
+        text = text + "  Most likely: " + period.likely + "\n";
+        text = text + "  Worst case: " + period.worst + "\n";
+      }
+
+      navigator.clipboard.writeText(text);
+      alert("Your results have been copied.");
+    }
+
+  </script>
+
+</body>
+</html>
